@@ -10,15 +10,15 @@ import org.junit.Test;
 
 public class LeitorPDF {
 	
-	public static PDDocument getPdDocument() throws InvalidPasswordException, IOException {
-		File arquivo = new File("/Users/pedropk/Downloads/Temp/eFisco/pitangpropostahabilitacao02.pdf");
+	public static PDDocument getPdDocument(String pFilePath) throws InvalidPasswordException, IOException {
+		File arquivo = new File(pFilePath);
 		
 		PDDocument documento = PDDocument.load(arquivo);
 		return documento;
 	}
 	
-	public static String getTexto() throws InvalidPasswordException, IOException {
-		PDDocument documento = getPdDocument();
+	public static String getTexto(String pFilePath) throws InvalidPasswordException, IOException {
+		PDDocument documento = getPdDocument(pFilePath);
 		PDFTextStripper pdfStripper = new PDFTextStripper();
 		
 		String texto = pdfStripper.getText(documento);
