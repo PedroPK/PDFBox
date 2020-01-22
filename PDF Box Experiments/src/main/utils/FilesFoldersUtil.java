@@ -76,7 +76,7 @@ public class FilesFoldersUtil {
 	}
 	
 	public static String				getSrcMainResiurceFolderContent() {
-		return null;
+		return "";
 	}
 	
 	public static String				getConfigPropertiesFilePath() {

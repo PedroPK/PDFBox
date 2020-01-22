@@ -1,5 +1,6 @@
 package main.utils;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -47,6 +48,17 @@ class FilesFoldersUtilTest {
 		
 		// Assert
 		assertNotNull(content);
+		
+		System.out.println(content);
+	}
+	
+	@Test
+	void testGetSrcMainResiurceFolderContent_NotEmpty() {
+		// Arrange + Act
+		String content = aFilesFolderUtil.getSrcMainResiurceFolderContent();
+		
+		// Assert
+		assertFalse(content.isEmpty());
 		
 		System.out.println(content);
 	}
