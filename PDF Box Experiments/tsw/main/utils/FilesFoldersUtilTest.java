@@ -63,6 +63,15 @@ class FilesFoldersUtilTest {
 		System.out.println(content);
 	}
 	
+	@Test
+	public void testGetOptionalEmpty_NotEmpty() {
+		// Arrange + Act
+		String response = aFilesFolderUtil.getOptionalEmpty();
+		
+		// Assert
+		assertNotNull(response);
+	}
+	
 	@Disabled
 	@Test
 	void testGetConfigPropertiesFilePath() {

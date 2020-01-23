@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -76,7 +77,35 @@ public class FilesFoldersUtil {
 	}
 	
 	public static String				getSrcMainResiurceFolderContent() {
-		return "";
+		File folder = new File(getFullPathToSrcMainResourceFolder());
+		
+		String response = "";
+		
+		if ( folder != null ) { 
+			if ( folder.isDirectory() ) { 
+				response =
+					response + folder.getName(); 
+			} else {
+				if ( folder.isFile() ) {
+					// TODO Resume from here
+				}
+			}
+		}
+		 
+		
+		/*
+		 * folder.ifPresent( response -> Optional.of(response.get() +
+		 * folder.get().getName()) );
+		 */
+		
+			
+		return folder.get().getName();
+	}
+	
+	public static String				getOptionalEmpty() {
+		Optional<String> response = Optional.empty();
+		
+		return response.get();
 	}
 	
 	public static String				getConfigPropertiesFilePath() {
