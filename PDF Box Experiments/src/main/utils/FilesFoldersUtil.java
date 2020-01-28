@@ -119,9 +119,15 @@ public class FilesFoldersUtil {
 	}
 	
 	public static List<File>	getAllFiles(String pPath) {
-		//List<File> filesAndOrFolders = drillDownPath(getFullPathToSrcMainResourceFolder());
+		List<File> result = new ArrayList<File>();
 		
-		List<File> result = drillDownPath(getFullPathToSrcMainResourceFolder());
+		List<File> allFilesAndDirectories = drillDownPath(getFullPathToSrcMainResourceFolder());
+		
+		for (File file : allFilesAndDirectories) {
+			if ( file != null && file.isFile() ) {
+				result.add(file);
+			}
+		}
 		
 		return result;
 	}
