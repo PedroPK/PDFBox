@@ -6,6 +6,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.Scanner;
@@ -77,40 +79,61 @@ public class FilesFoldersUtil {
 	}
 	
 	public static String				getSrcMainResourceFolderContent() {
-		File fileOrFolder = drillDownPath(getFullPathToSrcMainResourceFolder());
-		 
-			
-		return fileOrFolder.getAbsolutePath();
-	}
-
-	public static File drillDownPath(String pPathName) {
-		File fileOrFolder = new File(pPathName);
+		List<File> filesAndOrFolders = drillDownPath(getFullPathToSrcMainResourceFolder());
 		
 		String response = "";
+		if ( filesAndOrFolders != null ) {
+			for (File file : filesAndOrFolders) {
+				response = response + file.getAbsolutePath() + "\n";
+				
+				System.out.println( file.getAbsolutePath() );
+			}
+		}
+		
+		return response;
+	}
+
+	public static List<File> drillDownPath(String pPathName) {
+		List<File> response = new ArrayList<File>();
+		
+		File fileOrFolder = new File(pPathName);
+		
 		
 		if ( fileOrFolder != null ) {
-			System.out.println(fileOrFolder.getName());
+			response.add(fileOrFolder);
 			
-			response =
-				response + fileOrFolder.getName();
-			
-			System.out.println(response);
+			System.out.println(fileOrFolder.getAbsolutePath());
 			
 			if ( fileOrFolder.isDirectory() ) {
 				String[] subsoldersAndOrFiles = fileOrFolder.list();
 				
 				for (String fileOrFolderPathName : subsoldersAndOrFiles) {
-					drillDownPath( getFullPath(pPathName, fileOrFolderPathName) );
+					List<File> subfoldersAndFiles = 
+						drillDownPath( getFullPath(pPathName, fileOrFolderPathName) );
+					
+					response.addAll(subfoldersAndFiles);
 				}
 				
 				// TODO Resume from here
 			}
 		}
-		return fileOrFolder;
+		return response;
 	}
 
 	public static String getFullPath(String pPathName, String pFileOrFolderPathName) {
-		return pPathName + getFolderSeparator() + pFileOrFolderPathName;
+		String response = pPathName;
+		
+		if ( pPathName != null  ) { 
+			if ( !pPathName.endsWith("\\") ) {
+				response = response + 
+					getFolderSeparator();
+			}
+		}
+		
+		response = response +
+			pFileOrFolderPathName;
+		
+		return response;
 	}
 	
 	public static String				getOptionalEmpty() {
