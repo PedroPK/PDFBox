@@ -56,7 +56,6 @@ class FilesFoldersUtilTest {
 	}
 	
 	/**
-	 * TODO		Resume here
 	 */
 	@Test
 	void testGetSrcMainResiurceFolderContent_NotEmpty() {
@@ -141,28 +140,45 @@ class FilesFoldersUtilTest {
 		assertNotNull(result);
 	}
 	
-	@Disabled
+	
+	/**
+	 * TODO			Resume from here
+	 */
+	
 	@Test
 	void testGetAllFiles_NotNullElementsOnList() {
 		// Arrange
-		
+		String path = aFilesFolderUtil.getFullPathToSrcMainResourceFolder();
 		
 		// Act
-		
+		List<File> result = aFilesFolderUtil.getAllFiles(path);
 		
 		// Assert
+		for (File file : result) {
+			if ( file == null ) {
+				fail("There is a Null element in List of Files from Src\\Main\\Resources\\Folder");
+			}
+		}
 	}
 	
-	@Disabled
 	@Test
 	void testGetAllFiles_AllFilesNoDirectoryOnList() {
 		// Arrange
-		
+		String path = aFilesFolderUtil.getFullPathToSrcMainResourceFolder();
 		
 		// Act
-		
+		List<File> result = aFilesFolderUtil.getAllFiles(path);
 		
 		// Assert
+		for (File file : result) {
+			if ( file == null ) {
+				fail("There is a Null element in List of Files from Src\\Main\\Resources\\Folder");
+			} else {
+				if ( file.isDirectory() ) {
+					 fail("There is a Directory element in List of Files from Src\\Main\\Resources\\Folder");
+				}
+			}
+		}
 	}
 	
 	@Disabled
