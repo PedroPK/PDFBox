@@ -125,5 +125,49 @@ class FilesFoldersUtilTest {
 	void testCreateInputStream() {
 		fail("Not yet implemented");
 	}
+	
+	@Test
+	void testGetAllFiles_NotNullList() {
+		// Arrange
+		
+		
+		// Act
+		
+		
+		// Assert
+	}
+	
+	@Test
+	void testGetAllFiles_NotNullElementsOnList() {
+		// Arrange
+		
+		
+		// Act
+		
+		
+		// Assert
+	}
+	
+	@Test
+	void testGetAllFiles_AllFilesNoDirectoryOnList() {
+		// Arrange
+		
+		
+		// Act
+		
+		
+		// Assert
+	}
+	
+	@Test
+	void testGetAllFiles_OnlyPDF_FilesOnList() {
+		// Arrange
+		
+		
+		// Act
+		
+		
+		// Assert
+	}
 
 }

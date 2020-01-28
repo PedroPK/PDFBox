@@ -117,7 +117,15 @@ public class FilesFoldersUtil {
 		}
 		return response;
 	}
-
+	
+	public static List<File>	getAllFiles(String pPath) {
+		//List<File> filesAndOrFolders = drillDownPath(getFullPathToSrcMainResourceFolder());
+		
+		List<File> result = null;
+		
+		return result;
+	}
+	
 	public static String getFullPath(String pPathName, String pFileOrFolderPathName) {
 		String response = pPathName;
 		
