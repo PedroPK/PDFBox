@@ -5,13 +5,16 @@ import java.util.List;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 
+import main.utils.FilesFoldersUtil;
+
 
 public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 
 	@Override
 	public String getRelativePath_SrcMainResources() {
 		// TODO Auto-generated method stub
-		return null;
+		
+		return FilesFoldersUtil.getFullPathToSrcMainResourceFolder();
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package main.clear;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class LeitorNotasCorretagemClearTest {
@@ -17,17 +18,20 @@ class LeitorNotasCorretagemClearTest {
 		// Assert
 		assertNotNull(path);
 	}
-
+	
+	@Disabled
 	@Test
 	void testGetFile() {
 		fail("Not yet implemented");
 	}
-
+	
+	@Disabled
 	@Test
 	void testGetPdfDocument() {
 		fail("Not yet implemented");
 	}
-
+	
+	@Disabled
 	@Test
 	void testReadLine() {
 		fail("Not yet implemented");
