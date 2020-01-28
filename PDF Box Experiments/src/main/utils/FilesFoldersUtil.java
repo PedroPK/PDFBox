@@ -85,8 +85,6 @@ public class FilesFoldersUtil {
 		if ( filesAndOrFolders != null ) {
 			for (File file : filesAndOrFolders) {
 				response = response + file.getAbsolutePath() + "\n";
-				
-				System.out.println( file.getAbsolutePath() );
 			}
 		}
 		
@@ -134,12 +132,6 @@ public class FilesFoldersUtil {
 			pFileOrFolderPathName;
 		
 		return response;
-	}
-	
-	public static String				getOptionalEmpty() {
-		Optional<String> response = Optional.empty();
-		
-		return response.get();
 	}
 	
 	public static String				getConfigPropertiesFilePath() {
