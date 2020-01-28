@@ -44,7 +44,7 @@ class FilesFoldersUtilTest {
 	@Test
 	void testGetSrcMainResiurceFolderContent_NotNull() {
 		// Arrange + Act
-		String content = aFilesFolderUtil.getSrcMainResiurceFolderContent();
+		String content = aFilesFolderUtil.getSrcMainResourceFolderContent();
 		
 		// Assert
 		assertNotNull(content);
@@ -52,10 +52,13 @@ class FilesFoldersUtilTest {
 		System.out.println(content);
 	}
 	
+	/**
+	 * TODO		Resume here
+	 */
 	@Test
 	void testGetSrcMainResiurceFolderContent_NotEmpty() {
 		// Arrange + Act
-		String content = aFilesFolderUtil.getSrcMainResiurceFolderContent();
+		String content = aFilesFolderUtil.getSrcMainResourceFolderContent();
 		
 		// Assert
 		assertFalse(content.isEmpty());

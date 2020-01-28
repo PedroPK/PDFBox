@@ -76,30 +76,41 @@ public class FilesFoldersUtil {
 		return new File(getConfigPropertiesFilePath());
 	}
 	
-	public static String				getSrcMainResiurceFolderContent() {
-		File folder = new File(getFullPathToSrcMainResourceFolder());
+	public static String				getSrcMainResourceFolderContent() {
+		File fileOrFolder = drillDownPath(getFullPathToSrcMainResourceFolder());
+		 
+			
+		return fileOrFolder.getAbsolutePath();
+	}
+
+	public static File drillDownPath(String pPathName) {
+		File fileOrFolder = new File(pPathName);
 		
 		String response = "";
 		
-		if ( folder != null ) { 
-			if ( folder.isDirectory() ) { 
-				response =
-					response + folder.getName(); 
-			} else {
-				if ( folder.isFile() ) {
-					// TODO Resume from here
+		if ( fileOrFolder != null ) {
+			System.out.println(fileOrFolder.getName());
+			
+			response =
+				response + fileOrFolder.getName();
+			
+			System.out.println(response);
+			
+			if ( fileOrFolder.isDirectory() ) {
+				String[] subsoldersAndOrFiles = fileOrFolder.list();
+				
+				for (String fileOrFolderPathName : subsoldersAndOrFiles) {
+					drillDownPath( getFullPath(pPathName, fileOrFolderPathName) );
 				}
+				
+				// TODO Resume from here
 			}
 		}
-		 
-		
-		/*
-		 * folder.ifPresent( response -> Optional.of(response.get() +
-		 * folder.get().getName()) );
-		 */
-		
-			
-		return folder.get().getName();
+		return fileOrFolder;
+	}
+
+	public static String getFullPath(String pPathName, String pFileOrFolderPathName) {
+		return pPathName + getFolderSeparator() + pFileOrFolderPathName;
 	}
 	
 	public static String				getOptionalEmpty() {
