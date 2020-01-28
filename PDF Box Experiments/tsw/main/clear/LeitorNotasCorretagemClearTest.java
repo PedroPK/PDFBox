@@ -7,8 +7,15 @@ import org.junit.jupiter.api.Test;
 class LeitorNotasCorretagemClearTest {
 
 	@Test
-	void testGetRelativePath_SrcMainResources() {
-		fail("Not yet implemented");
+	void testGetRelativePath_SrcMainResources_NotNull() {
+		// Arrange
+		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		
+		// Act
+		String path = leitorNotasClear.getRelativePath_SrcMainResources();
+		
+		// Assert
+		assertNotNull(path);
 	}
 
 	@Test
