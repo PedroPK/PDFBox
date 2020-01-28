@@ -121,7 +121,7 @@ public class FilesFoldersUtil {
 	public static List<File>	getAllFiles(String pPath) {
 		//List<File> filesAndOrFolders = drillDownPath(getFullPathToSrcMainResourceFolder());
 		
-		List<File> result = null;
+		List<File> result = drillDownPath(getFullPathToSrcMainResourceFolder());
 		
 		return result;
 	}

@@ -137,7 +137,6 @@ class FilesFoldersUtilTest {
 		// Act
 		List<File> result = aFilesFolderUtil.getAllFiles(path);
 		
-		
 		// Assert
 		assertNotNull(result);
 	}
@@ -169,6 +168,18 @@ class FilesFoldersUtilTest {
 	@Disabled
 	@Test
 	void testGetAllFiles_OnlyPDF_FilesOnList() {
+		// Arrange
+		
+		
+		// Act
+		
+		
+		// Assert
+	}
+	
+	@Disabled
+	@Test
+	void testGetAllFiles_NoDuplicatedFilesOnList() {
 		// Arrange
 		
 		
