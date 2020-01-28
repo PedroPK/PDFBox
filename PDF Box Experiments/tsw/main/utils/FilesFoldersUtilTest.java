@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.io.File;
+import java.util.List;
+
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -129,14 +132,17 @@ class FilesFoldersUtilTest {
 	@Test
 	void testGetAllFiles_NotNullList() {
 		// Arrange
-		
+		String path = aFilesFolderUtil.getFullPathToSrcMainResourceFolder();
 		
 		// Act
+		List<File> result = aFilesFolderUtil.getAllFiles(path);
 		
 		
 		// Assert
+		assertNotNull(result);
 	}
 	
+	@Disabled
 	@Test
 	void testGetAllFiles_NotNullElementsOnList() {
 		// Arrange
@@ -148,6 +154,7 @@ class FilesFoldersUtilTest {
 		// Assert
 	}
 	
+	@Disabled
 	@Test
 	void testGetAllFiles_AllFilesNoDirectoryOnList() {
 		// Arrange
@@ -159,6 +166,7 @@ class FilesFoldersUtilTest {
 		// Assert
 	}
 	
+	@Disabled
 	@Test
 	void testGetAllFiles_OnlyPDF_FilesOnList() {
 		// Arrange
