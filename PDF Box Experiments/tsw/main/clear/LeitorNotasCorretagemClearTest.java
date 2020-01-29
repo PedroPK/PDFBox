@@ -19,6 +19,30 @@ class LeitorNotasCorretagemClearTest {
 		assertNotNull(path);
 	}
 	
+	@Test
+	void testGetRelativePath_SrcMainResources_NotEmpty() {
+		// Arrange
+		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		
+		// Act
+		String path = leitorNotasClear.getRelativePath_SrcMainResources();
+		
+		// Assert
+		assertFalse(path.isEmpty());
+	}
+	
+	@Test
+	void testGetRelativePath_SrcMainResources_ContainsSrcMainResources() {
+		// Arrange
+		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		
+		// Act
+		String path = leitorNotasClear.getRelativePath_SrcMainResources();
+		
+		// Assert
+		assertTrue(path.endsWith("src\\main\\resources\\"));
+	}
+	
 	@Disabled
 	@Test
 	void testGetFile() {
