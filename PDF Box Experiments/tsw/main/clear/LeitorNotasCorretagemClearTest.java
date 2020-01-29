@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.io.File;
 import java.util.List;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -65,17 +66,16 @@ class LeitorNotasCorretagemClearTest {
 		fail("Not yet implemented");
 	}
 	
-	@Disabled
 	@Test
-	void testGetPdfDocument() {
+	void testGetPdfDocument_FirstFile_NotNull() {
 		// Arrange
-		
+		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
 		
 		// Act
-		
+		PDDocument result= leitorNotasClear.getPdfDocument();
 		
 		// Assert
-		fail("Not yet implemented");
+		assertNotNull(result);
 	}
 	
 	@Disabled
