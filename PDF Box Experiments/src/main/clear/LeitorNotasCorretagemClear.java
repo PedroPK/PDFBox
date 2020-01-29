@@ -26,8 +26,7 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 
 	@Override
 	public PDDocument getPdfDocument() {
-		// TODO Auto-generated method stub
-		return null;
+		return new PDDocument();
 	}
 
 	@Override
