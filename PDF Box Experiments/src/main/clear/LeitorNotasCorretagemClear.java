@@ -44,8 +44,10 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 
 	@Override
 	public List<File> getAllFilesInDirectory() {
-		List<File> response = new ArrayList<>();
-		response.add(new File(""));
+		List<File> response = 
+			FilesFoldersUtil.getAllFiles(
+			FilesFoldersUtil.getFullPathToSrcMainResourceFolder()
+		);
 		
 		return response;
 	}
