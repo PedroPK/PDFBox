@@ -1,6 +1,7 @@
 package main.clear;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -44,7 +45,7 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 	@Override
 	public List<File> getAllFilesInDirectory() {
 		// TODO Auto-generated method stub
-		return null;
+		return new ArrayList<>();
 	}
 
 }
