@@ -214,4 +214,32 @@ public class FilesFoldersUtil {
 		return inputStream;
 	}
 	
+	public static String getFileExtension(File pFile) {
+		String response = "";
+		
+		if ( pFile != null ) { 
+			response = 
+				pFile.getName().substring(
+					pFile.getName().length() - 3, 
+					pFile.getName().length()
+			);
+			
+		}
+		
+		return response;
+	}
+	
+	public static boolean isPDF(String pFileExtension) {
+		return pFileExtension.equalsIgnoreCase("PDF");
+	}
+	
+	public static boolean isPDF(File pFile) {
+		boolean isPDF = 
+			FilesFoldersUtil.isPDF(
+			FilesFoldersUtil.getFileExtension(pFile)
+		);
+		
+		return isPDF;
+	}
+	
 }

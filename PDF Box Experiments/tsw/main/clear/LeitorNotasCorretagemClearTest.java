@@ -11,6 +11,8 @@ import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import main.utils.FilesFoldersUtil;
+
 class LeitorNotasCorretagemClearTest {
 
 	@Test
@@ -131,25 +133,21 @@ class LeitorNotasCorretagemClearTest {
 	}
 	
 	@Test
-	void testGetAllFilesInDirectory_AllFilesArePDFs() {
+	void test_getAllPDF_FilesInDirectory_AllFilesArePDFs() {
 		// Arrange
 		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
 		
 		// Act
-		List<File> result = leitorNotasClear.getAllFilesInDirectory();
+		List<File> result = leitorNotasClear.getAllPDF_FilesInDirectory();
 		
 		// Assert
 		for (File file : result) {
-			String fileExtension = 
-				file.getName().substring(
-					file.getName().length() - 3, 
-					file.getName().length()
-			);
+			boolean isPDF = FilesFoldersUtil.isPDF(file);
 			
-			if ( !fileExtension.equalsIgnoreCase("PDF") ) {
+			if ( !isPDF ) {
 				fail("There is a Non PDF File in the List");
 			}
 		}
 	}
-
+	
 }

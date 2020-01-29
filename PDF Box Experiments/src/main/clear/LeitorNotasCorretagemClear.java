@@ -52,4 +52,21 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		return response;
 	}
 
+	@Override
+	public List<File> getAllPDF_FilesInDirectory() {
+		List<File> allFiles = getAllFilesInDirectory();
+		
+		List<File> response = new ArrayList<File>();
+		
+		for (File file : allFiles) {
+			String fileExtension = FilesFoldersUtil.getFileExtension(file);
+			
+			if ( FilesFoldersUtil.isPDF(fileExtension) ) {
+				response.add(file);
+			}
+		}
+		
+		return response;
+	}
+
 }

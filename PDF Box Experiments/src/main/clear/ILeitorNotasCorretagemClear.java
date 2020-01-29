@@ -15,6 +15,8 @@ public interface ILeitorNotasCorretagemClear {
 	
 	public List<File>	getAllFilesInDirectory();
 	
+	public List<File>	getAllPDF_FilesInDirectory();
+	
 	public PDDocument	getPdfDocument();
 	
 	public String		readLine();
