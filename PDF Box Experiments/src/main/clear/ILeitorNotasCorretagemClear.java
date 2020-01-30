@@ -19,6 +19,8 @@ public interface ILeitorNotasCorretagemClear {
 	
 	public PDDocument	getPdfDocument();
 	
+	public String		readAllContentFrom(PDDocument pPdfDocument);
+	
 	public String		readLine();
 	
 }

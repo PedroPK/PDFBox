@@ -14,7 +14,7 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import com.google.common.truth.Truth;
+import static com.google.common.truth.Truth.*;
 import com.google.common.truth.Truth8;
 
 import main.utils.FilesFoldersUtil;
@@ -92,9 +92,34 @@ class LeitorNotasCorretagemClearTest {
 		int result= leitorNotasClear.getPdfDocument().getNumberOfPages();
 		
 		// Assert
-		Truth.assertThat(result).isGreaterThan(0);
-		//MatcherAssert.assertThat("", result, Matchers.greaterThan(0) );
-		//assertThat("Quantity of Pages in PDDocument", result, );
+		assertThat(result).isGreaterThan(0);
+	}
+	
+	@Test
+	void test_readAllContentFrom_PdfDocument_NotNull() {
+		// Arrange
+		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		
+		// Act
+		String response = 
+			leitorNotasClear.readAllContentFrom(
+			leitorNotasClear.getPdfDocument()
+		);
+		
+		// Assert
+		assertThat(response).isNotNull();
+	}
+	
+	@Test
+	void test_readAllContentFrom_PdfDocument_NotEmpty() {
+		// Arrange
+		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		
+		// Act
+		leitorNotasClear.readAllContentFrom(leitorNotasClear.getPdfDocument());
+		
+		// Assert
+		fail("Not yet implemented");
 	}
 	
 	@Disabled
