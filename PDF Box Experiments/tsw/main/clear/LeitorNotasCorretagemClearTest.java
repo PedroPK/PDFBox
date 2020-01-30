@@ -116,10 +116,13 @@ class LeitorNotasCorretagemClearTest {
 		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
 		
 		// Act
-		leitorNotasClear.readAllContentFrom(leitorNotasClear.getPdfDocument());
+		String response =
+			leitorNotasClear.readAllContentFrom(
+			leitorNotasClear.getPdfDocument()
+		);
 		
 		// Assert
-		fail("Not yet implemented");
+		assertThat(response).isNotEmpty();
 	}
 	
 	@Disabled
