@@ -1,11 +1,13 @@
 package main.clear;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 
+import main.LeitorPDF;
 import main.utils.FilesFoldersUtil;
 
 
@@ -26,7 +28,16 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 
 	@Override
 	public PDDocument getPdfDocument() {
-		return new PDDocument();
+		PDDocument response = new PDDocument();
+		
+		try {
+			response = LeitorPDF.getPdDocument(getPathToFirstPdfFile());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return response;
 	}
 
 	@Override
@@ -63,6 +74,21 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 			if ( FilesFoldersUtil.isPDF(fileExtension) ) {
 				response.add(file);
 			}
+		}
+		
+		return response;
+	}
+	
+	private static String	getPathToFirstPdfFile() {
+		String response = "";
+		
+		ILeitorNotasCorretagemClear leitorNotasCorretagemClear =
+			new LeitorNotasCorretagemClear();
+		
+		List<File> allPdfFiles = leitorNotasCorretagemClear.getAllPDF_FilesInDirectory();
+		
+		if ( allPdfFiles != null && !allPdfFiles.isEmpty() ) {
+			response = allPdfFiles.get(0).getAbsolutePath();
 		}
 		
 		return response;
