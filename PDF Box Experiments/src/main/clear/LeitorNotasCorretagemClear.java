@@ -82,7 +82,7 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 	private static String	getPathToFirstPdfFile() {
 		String response = "";
 		
-		ILeitorNotasCorretagemClear leitorNotasCorretagemClear =
+		LeitorNotasCorretagemClear leitorNotasCorretagemClear =
 			new LeitorNotasCorretagemClear();
 		
 		List<File> allPdfFiles = leitorNotasCorretagemClear.getAllPDF_FilesInDirectory();
@@ -97,6 +97,17 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 	@Override
 	public String readAllContentFrom(PDDocument pPdfDocument) {
 		String response = "";
+		
+		LeitorNotasCorretagemClear leitorNotasCorretagemClear =
+			new LeitorNotasCorretagemClear();
+		
+		try {
+			response = LeitorPDF.getTexto( leitorNotasCorretagemClear.getPdfDocument() );
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return response;
 	}
 

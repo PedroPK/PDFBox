@@ -123,6 +123,8 @@ class LeitorNotasCorretagemClearTest {
 		
 		// Assert
 		assertThat(response).isNotEmpty();
+		
+		System.out.println(response);
 	}
 	
 	@Disabled

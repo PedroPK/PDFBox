@@ -29,11 +29,18 @@ public class LeitorPDF {
 	}
 	
 	public static String getTexto(String pFilePath) throws InvalidPasswordException, IOException {
-		PDDocument documento = getPdDocument(pFilePath);
+		PDDocument document = getPdDocument(pFilePath);
 		PDFTextStripper pdfStripper = new PDFTextStripper();
 		
-		String texto = pdfStripper.getText(documento);
-		return texto;
+		String responseText = pdfStripper.getText(document);
+		return responseText;
+	}
+	
+	public static String getTexto(PDDocument pDocument) throws InvalidPasswordException, IOException {
+		PDFTextStripper pdfStripper = new PDFTextStripper();
+		
+		String responseText = pdfStripper.getText(pDocument);
+		return responseText;
 	}
 	
 	public static String[] getPrefixArray(String pOriginalFileName) {
