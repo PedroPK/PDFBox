@@ -1,5 +1,6 @@
 package main.clear;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -9,17 +10,14 @@ import java.io.File;
 import java.util.List;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-
-import static com.google.common.truth.Truth.*;
-import com.google.common.truth.Truth8;
 
 import main.utils.FilesFoldersUtil;
 
 class LeitorNotasCorretagemClearTest {
+
+	private static final String PATH__SRC_MAIN_RESOURCES = "src\\main\\resources\\";
 
 	@Test
 	void testGetRelativePath_SrcMainResources_NotNull() {
@@ -54,7 +52,7 @@ class LeitorNotasCorretagemClearTest {
 		String path = leitorNotasClear.getRelativePath_SrcMainResources();
 		
 		// Assert
-		assertTrue(path.endsWith("src\\main\\resources\\"));
+		assertTrue(path.endsWith(PATH__SRC_MAIN_RESOURCES));
 	}
 	
 	@Disabled

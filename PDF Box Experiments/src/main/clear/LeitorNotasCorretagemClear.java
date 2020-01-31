@@ -79,7 +79,7 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		return response;
 	}
 	
-	private static String	getPathToFirstPdfFile() {
+	public static String	getPathToFirstPdfFile() {
 		String response = "";
 		
 		LeitorNotasCorretagemClear leitorNotasCorretagemClear =

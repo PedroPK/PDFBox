@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
 
 public interface ILeitorNotasCorretagemClear {
 	
@@ -18,6 +19,8 @@ public interface ILeitorNotasCorretagemClear {
 	public List<File>	getAllPDF_FilesInDirectory();
 	
 	public PDDocument	getPdfDocument();
+	
+	public PDPage		getPage(int pPageNumber);
 	
 	public String		readAllContentFrom(PDDocument pPdfDocument);
 	

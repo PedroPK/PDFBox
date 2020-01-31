@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.encryption.InvalidPasswordException;
 import org.apache.pdfbox.text.PDFTextStripper;
 
@@ -26,6 +27,15 @@ public class LeitorPDF {
 		
 		PDDocument documento = PDDocument.load(arquivo, pPassword);
 		return documento;
+	}
+	
+	public static PDPage		getPage( 
+		PDDocument	pPdf,
+		int			pPageNumber
+	) {
+		PDPage	response = null;
+		
+		return	response;
 	}
 	
 	public static String getTexto(String pFilePath) throws InvalidPasswordException, IOException {
