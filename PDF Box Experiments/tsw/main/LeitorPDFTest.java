@@ -175,7 +175,7 @@ public class LeitorPDFTest {
 	}
 	
 	@Test
-	void test_getPage_NotNull() throws InvalidPasswordException, IOException {
+	public void test_getPage_NotNull() throws InvalidPasswordException, IOException {
 		// Arrange
 		String		path			=	LeitorNotasCorretagemClear.getPathToFirstPdfFile();
 		PDDocument	pdfDocument		=	LeitorPDF.getPdDocument(path);

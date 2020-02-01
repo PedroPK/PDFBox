@@ -35,6 +35,10 @@ public class LeitorPDF {
 	) {
 		PDPage	response = null;
 		
+		if ( pPdf != null && pPdf.getNumberOfPages() > pPageNumber ) {
+			response = pPdf.getPage(pPageNumber);
+		}
+		
 		return	response;
 	}
 	
