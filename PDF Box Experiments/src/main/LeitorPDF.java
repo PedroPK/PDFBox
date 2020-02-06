@@ -26,6 +26,8 @@ public class LeitorPDF {
 		File arquivo = new File(pFilePath);
 		
 		PDDocument documento = PDDocument.load(arquivo, pPassword);
+		documento.close();
+		
 		return documento;
 	}
 	
@@ -64,7 +66,18 @@ public class LeitorPDF {
 		String response = "";
 		
 		if ( pPdfDocument != null && pPageNumber >= 0 ) {
-			response = ".";
+			PDFTextStripper pdfStripper;
+			try {
+				pdfStripper = new PDFTextStripper();
+				
+				pdfStripper.setStartPage(	pPageNumber);
+				pdfStripper.setEndPage(		pPageNumber + 1);
+				
+				response = pdfStripper.getText(pPdfDocument);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		
 		return response;
