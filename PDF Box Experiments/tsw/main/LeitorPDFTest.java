@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
 
 import static com.google.common.truth.Truth.*;
 
@@ -38,6 +39,7 @@ public class LeitorPDFTest {
 		assertNotNull(arquivo);
 	}
 	
+	@Ignore
 	@Test
 	public void test_tentarCriarPDDocumentPropostaHabilitacaoPitang() throws InvalidPasswordException, IOException {
 		// Arrange + Act
@@ -47,6 +49,7 @@ public class LeitorPDFTest {
 		assertNotNull(documento);
 	}
 	
+	@Ignore
 	@Test
 	public void test_tentarLerPropostaHabilitacaoPitang() throws InvalidPasswordException, IOException {
 		// Arrange + Act
@@ -66,6 +69,7 @@ public class LeitorPDFTest {
 		assertNotNull(arquivo);
 	}
 	
+	@Ignore
 	@Test
 	public void test_tentarCriarPDDocumentPolicentroContraCheque_2019_02Fevereiro() throws InvalidPasswordException, IOException {
 		// Arrange + Act
@@ -75,6 +79,7 @@ public class LeitorPDFTest {
 		assertNotNull(documento);
 	}
 	
+	@Ignore
 	@Test
 	public void test_tentarLerPolicentroContraCheque_2019_02Fevereiro() throws InvalidPasswordException, IOException {
 		// Arrange + act
@@ -86,6 +91,8 @@ public class LeitorPDFTest {
 		assertFalse(texto.isEmpty());
 	}
 	
+	@Disabled
+	@Ignore
 	@Test
 	public void test_getPdDocumentEncrypted_NullAndSecurityEnabled() throws InvalidPasswordException, IOException {
 		// Arrange + Act
@@ -100,6 +107,8 @@ public class LeitorPDFTest {
 		assertFalse(documento.isAllSecurityToBeRemoved());
 	}
 	
+	@Disabled
+	@Ignore
 	@Test
 	public void test_removeEncryption_PdDocumentoEncryptedSucessfullySecurityRemoved() throws InvalidPasswordException, IOException {
 		// Arrange
@@ -113,6 +122,8 @@ public class LeitorPDFTest {
 		assertTrue(documento.isAllSecurityToBeRemoved());
 	}
 	
+	@Disabled
+	@Ignore
 	@Test
 	public void test_getDecryptedFile_NotNull() throws InvalidPasswordException, IOException {
 		// Arrange
@@ -126,6 +137,7 @@ public class LeitorPDFTest {
 		assertNotNull(decryptedFile);
 	}
 	
+	@Ignore
 	@Test
 	public void test_getPdDocumentEncrypted_DecryptedFileSavedSucessfully() throws InvalidPasswordException, IOException {
 		// Arrange
@@ -185,6 +197,34 @@ public class LeitorPDFTest {
 		
 		// Assert
 		assertThat(page).isNotNull();
+	}
+	
+	@Test
+	public void test_getText_FromPage01_NotNull() throws InvalidPasswordException, IOException {
+		// Arrange
+		String		path			=	LeitorNotasCorretagemClear.getPathToFirstPdfFile();
+		PDDocument	pdfDocument		=	LeitorPDF.getPdDocument(path);
+		
+		// Act
+		String response = LeitorPDF.getText(pdfDocument, 0);
+		
+		// Assert
+		assertThat(response).isNotNull();
+		//fail("Not implemented yet");
+	}
+	
+	@Test
+	public void test_getText_FromPage01_NotEmpty() throws InvalidPasswordException, IOException {
+		// Arrange
+		String		path			=	LeitorNotasCorretagemClear.getPathToFirstPdfFile();
+		PDDocument	pdfDocument		=	LeitorPDF.getPdDocument(path);
+		
+		// Act
+		String response = LeitorPDF.getText(pdfDocument, 0);
+		
+		// Assert
+		assertThat(response).isNotEmpty();
+		//fail("Not implemented yet");
 	}
 	
 }

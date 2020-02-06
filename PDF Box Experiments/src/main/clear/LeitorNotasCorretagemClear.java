@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
 
 import main.LeitorPDF;
 import main.utils.FilesFoldersUtil;
@@ -109,6 +110,12 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		}
 		
 		return response;
+	}
+
+	@Override
+	public PDPage getPage(int pPageNumber) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

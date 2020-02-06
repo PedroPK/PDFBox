@@ -57,6 +57,15 @@ public class LeitorPDF {
 		return responseText;
 	}
 	
+	public static String getText(
+		PDDocument	pPdfDocument,
+		int			pPageNumber
+	) {
+		String response = null;
+		
+		return response;
+	}
+	
 	public static String[] getPrefixArray(String pOriginalFileName) {
 		String[] fileName = pOriginalFileName.split(PDF_EXTENSION);
 		return fileName;
