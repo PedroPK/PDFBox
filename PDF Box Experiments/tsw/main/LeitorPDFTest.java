@@ -200,6 +200,60 @@ public class LeitorPDFTest {
 	}
 	
 	@Test
+	public void test_getText_FromPage01_PdDocumentNull_TextNotNull() throws InvalidPasswordException, IOException {
+		// Arrange
+		PDDocument	pdfDocument		=	null;
+		
+		// Act
+		String response = LeitorPDF.getText(pdfDocument, 0);
+		
+		// Assert
+		assertThat(response).isNotNull();
+		//fail("Not implemented yet");
+	}
+	
+	@Test
+	public void test_getText_FromPage01_PdDocumentNull_TextEmpty() throws InvalidPasswordException, IOException {
+		// Arrange
+		PDDocument	pdfDocument		=	null;
+		
+		// Act
+		String response = LeitorPDF.getText(pdfDocument, 0);
+		
+		// Assert
+		assertThat(response).isEmpty();
+		//fail("Not implemented yet");
+	}
+	
+	@Test
+	public void test_getText_FromPage01_PageNegative_TextNotNull() throws InvalidPasswordException, IOException {
+		// Arrange
+		String		path			=	LeitorNotasCorretagemClear.getPathToFirstPdfFile();
+		PDDocument	pdfDocument		=	LeitorPDF.getPdDocument(path);
+		
+		// Act
+		String response = LeitorPDF.getText(pdfDocument, -1);
+		
+		// Assert
+		assertThat(response).isNotNull();
+		//fail("Not implemented yet");
+	}
+	
+	@Test
+	public void test_getText_FromPage01_PageNegative_TextEmpty() throws InvalidPasswordException, IOException {
+		// Arrange
+		String		path			=	LeitorNotasCorretagemClear.getPathToFirstPdfFile();
+		PDDocument	pdfDocument		=	LeitorPDF.getPdDocument(path);
+		
+		// Act
+		String response = LeitorPDF.getText(pdfDocument, -1);
+		
+		// Assert
+		assertThat(response).isEmpty();
+		//fail("Not implemented yet");
+	}
+	
+	@Test
 	public void test_getText_FromPage01_NotNull() throws InvalidPasswordException, IOException {
 		// Arrange
 		String		path			=	LeitorNotasCorretagemClear.getPathToFirstPdfFile();
@@ -224,6 +278,20 @@ public class LeitorPDFTest {
 		
 		// Assert
 		assertThat(response).isNotEmpty();
+		//fail("Not implemented yet");
+	}
+	
+	@Test
+	public void test_getText_FromPage01_NotBlank() throws InvalidPasswordException, IOException {
+		// Arrange
+		String		path			=	LeitorNotasCorretagemClear.getPathToFirstPdfFile();
+		PDDocument	pdfDocument		=	LeitorPDF.getPdDocument(path);
+		
+		// Act
+		String response = LeitorPDF.getText(pdfDocument, 0);
+		
+		// Assert
+		assertThat(response.trim()).isNotEmpty();
 		//fail("Not implemented yet");
 	}
 	
