@@ -61,7 +61,11 @@ public class LeitorPDF {
 		PDDocument	pPdfDocument,
 		int			pPageNumber
 	) {
-		String response = null;
+		String response = "";
+		
+		if ( pPdfDocument != null && pPageNumber >= 0 ) {
+			response = ".";
+		}
 		
 		return response;
 	}
