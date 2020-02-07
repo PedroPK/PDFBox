@@ -10,6 +10,7 @@ import java.io.File;
 import java.util.List;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
+import org.junit.Ignore;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -93,6 +94,8 @@ class LeitorNotasCorretagemClearTest {
 		assertThat(result).isGreaterThan(0);
 	}
 	
+	@Ignore
+	@Disabled
 	@Test
 	void test_readAllContentFrom_PdfDocument_NotNull() {
 		// Arrange
@@ -108,6 +111,8 @@ class LeitorNotasCorretagemClearTest {
 		assertThat(response).isNotNull();
 	}
 	
+	@Ignore
+	@Disabled
 	@Test
 	void test_readAllContentFrom_PdfDocument_NotEmpty() {
 		// Arrange
@@ -195,6 +200,76 @@ class LeitorNotasCorretagemClearTest {
 				fail("There is a Non PDF File in the List");
 			}
 		}
+	}
+	
+	@Test
+	void test_readPage_FirstPageContent_NotNull() {
+		// Arrange
+		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		PDDocument pdfDocument = leitorNotasClear.getPdfDocument();
+		int firstPageNumber = 0;
+		
+		// Act
+		String response = leitorNotasClear.readPage(pdfDocument, firstPageNumber);
+		
+		// Assert
+		assertThat(response).isNotNull();
+	}
+	
+	@Test
+	void test_readPage_FirstPageContent_NotEmpty() {
+		// Arrange
+		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		PDDocument pdfDocument = leitorNotasClear.getPdfDocument();
+		int firstPageNumber = 0;
+		
+		// Act
+		String response = leitorNotasClear.readPage(pdfDocument, firstPageNumber);
+		
+		// Assert
+		assertThat(response).isNotEmpty();
+	}
+	
+	@Test
+	void test_readDate_FirstPage_NotNull() {
+		// Arrange
+		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		PDDocument pdfDocument = leitorNotasClear.getPdfDocument();
+		int firstPageNumber = 0;
+		
+		// Act
+		String response = leitorNotasClear.readDate(pdfDocument, firstPageNumber);
+		
+		// Assert
+		assertThat(response).isNotNull();
+	}
+	
+	@Test
+	void test_readDate_FirstPage_NotEmpty() {
+		// Arrange
+		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		PDDocument pdfDocument = leitorNotasClear.getPdfDocument();
+		int firstPageNumber = 0;
+		
+		// Act
+		String response = leitorNotasClear.readDate(pdfDocument, firstPageNumber);
+		
+		// Assert
+		assertThat(response).isNotEmpty();
+	}
+	
+	@Test
+	void test_readDate_FirstPage_13July2018() {
+		// Arrange
+		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		PDDocument pdfDocument = leitorNotasClear.getPdfDocument();
+		int firstPageNumber = 0;
+		
+		// Act
+		String response = leitorNotasClear.readDate(pdfDocument, firstPageNumber);
+		
+		// Assert
+		assertThat(response).isEqualTo("13/07/2018");
 	}
 	
 }

@@ -3,6 +3,7 @@ package main.clear;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -33,6 +34,7 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		
 		try {
 			response = LeitorPDF.getPdDocument(getPathToFirstPdfFile());
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -116,6 +118,32 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 	public PDPage getPage(int pPageNumber) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public String readPage(PDDocument pPdfDocument, int pPageNumer) {
+		return LeitorPDF.getText(pPdfDocument, pPageNumer);
+	}
+
+	@Override
+	public String readDate(PDDocument pPdfDocument, int pPageNumer) {
+		String response = "";
+		
+		String pageContent = LeitorPDF.getText(pPdfDocument, pPageNumer);
+		
+		if ( pageContent != null && !pageContent.isEmpty() ) {
+			List<String>	lines =  Arrays.asList(pageContent.split("\n"));
+			
+			if ( lines != null && !lines.isEmpty() ) {
+				response = lines.get(2);
+				
+				if ( response != null && response.length() > 10 ) {
+					response = response.substring(0, 10);
+				}
+			}
+		}
+		
+		return response;
 	}
 
 }
