@@ -22,7 +22,9 @@ public interface ILeitorNotasCorretagemClear {
 	
 	public PDPage		getPage(int pPageNumber);
 	
-	public String		readAllContentFrom(	PDDocument pPdfDocument);
+	public String		readAllContentFrom(			PDDocument pPdfDocument);
+	
+	public List<String>	readContentFromEachPage(	PDDocument pPdfDocument);
 	
 	public String		readPage(
 		PDDocument	pPdfDocument,

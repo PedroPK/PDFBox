@@ -272,4 +272,18 @@ class LeitorNotasCorretagemClearTest {
 		assertThat(response).isEqualTo("13/07/2018");
 	}
 	
+	@Test
+	void test_readDate_SecondtPage_20July2018() {
+		// Arrange
+		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		PDDocument pdfDocument = leitorNotasClear.getPdfDocument();
+		int firstPageNumber = 1;
+		
+		// Act
+		String response = leitorNotasClear.readDate(pdfDocument, firstPageNumber);
+		
+		// Assert
+		assertThat(response).isEqualTo("20/07/2018");
+	}
+	
 }

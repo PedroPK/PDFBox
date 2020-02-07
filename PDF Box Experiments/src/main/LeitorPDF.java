@@ -49,6 +49,9 @@ public class LeitorPDF {
 		PDFTextStripper pdfStripper = new PDFTextStripper();
 		
 		String responseText = pdfStripper.getText(document);
+		
+		document.close();
+		
 		return responseText;
 	}
 	
@@ -56,6 +59,8 @@ public class LeitorPDF {
 		PDFTextStripper pdfStripper = new PDFTextStripper();
 		
 		String responseText = pdfStripper.getText(pDocument);
+		
+		
 		return responseText;
 	}
 	
@@ -70,7 +75,10 @@ public class LeitorPDF {
 			try {
 				pdfStripper = new PDFTextStripper();
 				
+				// Inclusive
 				pdfStripper.setStartPage(	pPageNumber);
+				
+				// Exclusive
 				pdfStripper.setEndPage(		pPageNumber + 1);
 				
 				response = pdfStripper.getText(pPdfDocument);

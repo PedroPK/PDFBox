@@ -14,6 +14,11 @@ import main.utils.FilesFoldersUtil;
 
 
 public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
+	
+	public static final String PAGE_HEADER	=	"NOTA DE CORRETAGEM";
+	
+	public static final String CONTENT_HEADER = "Q D/CValor Operação / AjustePreço / AjusteQuantidadeObs. (*)Especificação do títuloPrazoTipo mercadoC/VNegociação";
+	public static final String CONTENT_FOOTER = "Resumo dos Negócios Resumo Financeiro D/C\r\n";
 
 	@Override
 	public String getRelativePath_SrcMainResources() {
@@ -39,6 +44,12 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		/*
+		 * This code below is preventing to read the Content of PDF Document
+		 * 
+		 * finally { try { response.close(); } catch (IOException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); } }
+		 */
 		
 		return response;
 	}
@@ -145,5 +156,6 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		
 		return response;
 	}
+	
 
 }
