@@ -83,6 +83,18 @@ public class LeitorPDF {
 		PDDocument	pPdfDocument,
 		int			pPageNumber
 	) {
+		return 
+			getText(
+				pPdfDocument, 
+				pPageNumber, 
+				true);
+	}
+	
+	public static String getText(
+		PDDocument	pPdfDocument,
+		int			pPageNumber,
+		boolean		pClosePdDocument
+	) {
 		String response = "";
 		
 		if ( pPdfDocument != null && pPageNumber >= 0 ) {
@@ -97,6 +109,10 @@ public class LeitorPDF {
 				pdfStripper.setEndPage(		pPageNumber + 1);
 				
 				response = pdfStripper.getText(pPdfDocument);
+				
+				if ( pClosePdDocument ) {
+					pPdfDocument.close();
+				}
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
