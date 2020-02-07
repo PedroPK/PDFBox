@@ -45,13 +45,24 @@ public class LeitorPDF {
 	}
 	
 	public static String getText(String pFilePath) throws InvalidPasswordException, IOException {
-		PDDocument document = getPdDocument(pFilePath);
-		PDFTextStripper pdfStripper = new PDFTextStripper();
-		
-		String responseText = pdfStripper.getText(document);
-		
-		document.close();
-		
+		return getText(pFilePath, true);
+	}
+	
+	public static String getText(
+		String		pFilePath,
+		boolean		pClosePdDocument)
+	throws InvalidPasswordException, IOException {
+		String responseText = "";
+		if ( pFilePath != null && !pFilePath.isEmpty() ) { 
+			PDDocument document = getPdDocument(pFilePath);
+			PDFTextStripper pdfStripper = new PDFTextStripper();
+			
+			responseText = pdfStripper.getText(document);
+			
+			if ( pClosePdDocument ) {
+				document.close();
+			}
+		}
 		return responseText;
 	}
 	
