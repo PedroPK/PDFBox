@@ -59,7 +59,6 @@ public class LeitorPDF {
 		return getText(pDocument, true);
 	}
 	
-	
 	public static String getText(
 		PDDocument	pDocument,
 		boolean		pClosePdDocument)
@@ -158,17 +157,19 @@ public class LeitorPDF {
 		String	pFilePath,
 		String	pPassword)
 	throws InvalidPasswordException, IOException {
-		PDDocument documento = 
+		PDDocument document = 
 			LeitorPDF.getPdDocumentEncrypted(
 				pFilePath,
 				pPassword 
 		);
 		
-		documento.setAllSecurityToBeRemoved(true);
+		document.setAllSecurityToBeRemoved(true);
 		
 		File decryptedFile = new File(pFilePath + "_decrypted");
 		
-		documento.save(decryptedFile);
+		document.save(decryptedFile);
+		
+		document.close();
 	}
 	
 }
