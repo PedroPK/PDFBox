@@ -44,7 +44,7 @@ public class LeitorPDF {
 		return	response;
 	}
 	
-	public static String getTexto(String pFilePath) throws InvalidPasswordException, IOException {
+	public static String getText(String pFilePath) throws InvalidPasswordException, IOException {
 		PDDocument document = getPdDocument(pFilePath);
 		PDFTextStripper pdfStripper = new PDFTextStripper();
 		
@@ -55,11 +55,26 @@ public class LeitorPDF {
 		return responseText;
 	}
 	
-	public static String getTexto(PDDocument pDocument) throws InvalidPasswordException, IOException {
-		PDFTextStripper pdfStripper = new PDFTextStripper();
+	public static String getText(PDDocument pDocument) throws InvalidPasswordException, IOException {
+		return getText(pDocument, true);
+	}
+	
+	
+	public static String getText(
+		PDDocument	pDocument,
+		boolean		pClosePdDocument)
+	throws InvalidPasswordException, IOException {
+		String responseText = "";
 		
-		String responseText = pdfStripper.getText(pDocument);
-		
+		if ( pDocument != null ) {
+			PDFTextStripper pdfStripper = new PDFTextStripper();
+			
+			responseText = pdfStripper.getText(pDocument);
+			
+			if ( pClosePdDocument ) {
+				pDocument.close();
+			}
+		}
 		
 		return responseText;
 	}

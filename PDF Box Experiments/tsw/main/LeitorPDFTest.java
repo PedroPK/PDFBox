@@ -51,9 +51,9 @@ public class LeitorPDFTest {
 	
 	@Ignore
 	@Test
-	public void test_tentarLerPropostaHabilitacaoPitang() throws InvalidPasswordException, IOException {
+	public void test_getText_tentarLerPropostaHabilitacaoPitang() throws InvalidPasswordException, IOException {
 		// Arrange + Act
-		String texto = LeitorPDF.getTexto(PATH_PDF_PROPOSTA_HABILITACAO_PITANG);
+		String texto = LeitorPDF.getText(PATH_PDF_PROPOSTA_HABILITACAO_PITANG);
 		
 		// Assert
 		assertNotNull(texto);
@@ -81,9 +81,9 @@ public class LeitorPDFTest {
 	
 	@Ignore
 	@Test
-	public void test_tentarLerPolicentroContraCheque_2019_02Fevereiro() throws InvalidPasswordException, IOException {
+	public void test_getText_tentarLerPolicentroContraCheque_2019_02Fevereiro() throws InvalidPasswordException, IOException {
 		// Arrange + act
-		String texto = LeitorPDF.getTexto(PATH_PDF_POLICENTRO_CONTRA_CHEQUE_2019_02_FEVEREIRO);
+		String texto = LeitorPDF.getText(PATH_PDF_POLICENTRO_CONTRA_CHEQUE_2019_02_FEVEREIRO);
 		
 		
 		// Assert

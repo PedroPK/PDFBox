@@ -116,7 +116,7 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 			new LeitorNotasCorretagemClear();
 		
 		try {
-			response = LeitorPDF.getTexto( leitorNotasCorretagemClear.getPdfDocument() );
+			response = LeitorPDF.getText( leitorNotasCorretagemClear.getPdfDocument() );
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -155,6 +155,12 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		}
 		
 		return response;
+	}
+
+	@Override
+	public List<String> readContentFromEachPage(PDDocument pPdfDocument) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 
