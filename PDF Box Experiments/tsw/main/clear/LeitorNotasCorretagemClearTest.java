@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -71,61 +72,76 @@ class LeitorNotasCorretagemClearTest {
 	}
 	
 	@Test
-	void testGetPdfDocument_FirstFile_NotNull() {
+	void testGetPdfDocument_FirstFile_NotNull() throws IOException {
 		// Arrange
 		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
 		
 		// Act
-		PDDocument result= leitorNotasClear.getPdfDocument();
+		PDDocument document= leitorNotasClear.getPdfDocument();
 		
 		// Assert
-		assertNotNull(result);
+		assertNotNull(document);
+		
+		// Avoiding a Warning message in Console.
+		document.close();
 	}
 	
 	@Test
-	void testGetPdfDocument_FirstFile_PageQuantityGreaterThanZero() {
+	void testGetPdfDocument_FirstFile_PageQuantityGreaterThanZero() throws IOException {
 		// Arrange
-		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		ILeitorNotasCorretagemClear leitorNotasClear	= new LeitorNotasCorretagemClear();
+		PDDocument					pdfDocument			=	leitorNotasClear.getPdfDocument();
 		
 		// Act
-		int result= leitorNotasClear.getPdfDocument().getNumberOfPages();
+		int result= pdfDocument.getNumberOfPages();
 		
 		// Assert
 		assertThat(result).isGreaterThan(0);
+		
+		// Avoiding a Warning message in Console.
+		pdfDocument.close();
 	}
 	
 	@Ignore
 	@Disabled
 	@Test
-	void test_readAllContentFrom_PdfDocument_NotNull() {
+	void test_readAllContentFrom_PdfDocument_NotNull() throws IOException {
 		// Arrange
 		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		PDDocument					pdfDocument			=	leitorNotasClear.getPdfDocument();
 		
 		// Act
 		String response = 
 			leitorNotasClear.readAllContentFrom(
-			leitorNotasClear.getPdfDocument()
+			pdfDocument
 		);
 		
 		// Assert
 		assertThat(response).isNotNull();
+		
+		// Avoiding a Warning message in Console.
+		pdfDocument.close();
 	}
 	
 	@Ignore
 	@Disabled
 	@Test
-	void test_readAllContentFrom_PdfDocument_NotEmpty() {
+	void test_readAllContentFrom_PdfDocument_NotEmpty() throws IOException {
 		// Arrange
 		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		PDDocument					pdfDocument			=	leitorNotasClear.getPdfDocument();
 		
 		// Act
 		String response =
 			leitorNotasClear.readAllContentFrom(
-			leitorNotasClear.getPdfDocument()
+			pdfDocument
 		);
 		
 		// Assert
 		assertThat(response).isNotEmpty();
+		
+		// Avoiding a Warning message in Console.
+		pdfDocument.close();
 		
 		System.out.println(response);
 	}
@@ -203,7 +219,7 @@ class LeitorNotasCorretagemClearTest {
 	}
 	
 	@Test
-	void test_readPage_FirstPageContent_NotNull() {
+	void test_readPage_FirstPageContent_NotNull() throws IOException {
 		// Arrange
 		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
 		PDDocument pdfDocument = leitorNotasClear.getPdfDocument();
@@ -214,10 +230,13 @@ class LeitorNotasCorretagemClearTest {
 		
 		// Assert
 		assertThat(response).isNotNull();
+		
+		// Avoiding a Warning message in Console.
+		pdfDocument.close();
 	}
 	
 	@Test
-	void test_readPage_FirstPageContent_NotEmpty() {
+	void test_readPage_FirstPageContent_NotEmpty() throws IOException {
 		// Arrange
 		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
 		PDDocument pdfDocument = leitorNotasClear.getPdfDocument();
@@ -228,10 +247,13 @@ class LeitorNotasCorretagemClearTest {
 		
 		// Assert
 		assertThat(response).isNotEmpty();
+		
+		// Avoiding a Warning message in Console.
+		pdfDocument.close();
 	}
 	
 	@Test
-	void test_readDate_FirstPage_NotNull() {
+	void test_readDate_FirstPage_NotNull() throws IOException {
 		// Arrange
 		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
 		PDDocument pdfDocument = leitorNotasClear.getPdfDocument();
@@ -242,10 +264,13 @@ class LeitorNotasCorretagemClearTest {
 		
 		// Assert
 		assertThat(response).isNotNull();
+		
+		// Avoiding a Warning message in Console.
+		pdfDocument.close();
 	}
 	
 	@Test
-	void test_readDate_FirstPage_NotEmpty() {
+	void test_readDate_FirstPage_NotEmpty() throws IOException {
 		// Arrange
 		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
 		PDDocument pdfDocument = leitorNotasClear.getPdfDocument();
@@ -256,10 +281,13 @@ class LeitorNotasCorretagemClearTest {
 		
 		// Assert
 		assertThat(response).isNotEmpty();
+		
+		// Avoiding a Warning message in Console.
+		pdfDocument.close();
 	}
 	
 	@Test
-	void test_readDate_FirstPage_13July2018() {
+	void test_readDate_FirstPage_13July2018() throws IOException {
 		// Arrange
 		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
 		PDDocument pdfDocument = leitorNotasClear.getPdfDocument();
@@ -270,10 +298,13 @@ class LeitorNotasCorretagemClearTest {
 		
 		// Assert
 		assertThat(response).isEqualTo("13/07/2018");
+		
+		// Avoiding a Warning message in Console.
+		pdfDocument.close();
 	}
 	
 	@Test
-	void test_readDate_SecondtPage_20July2018() {
+	void test_readDate_SecondtPage_20July2018() throws IOException {
 		// Arrange
 		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
 		PDDocument pdfDocument = leitorNotasClear.getPdfDocument();
@@ -284,6 +315,73 @@ class LeitorNotasCorretagemClearTest {
 		
 		// Assert
 		assertThat(response).isEqualTo("20/07/2018");
+		
+		// Avoiding a Warning message in Console.
+		pdfDocument.close();
+	}
+	
+	@Test
+	void test_readContentFromEachPage_NullDocument() {
+		// Arrange
+		LeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		PDDocument pdfDocument = null;
+		
+		// Act
+		List<String> response =
+			leitorNotasClear.readContentFromEachPage(
+			pdfDocument
+		);
+		
+		// Assert
+		assertThat(response).isNotNull();
+		assertThat(response).isEmpty();
+	}
+	
+	@Test
+	void test_readContentFromEachPage_NewEmptyDocument() {
+		// Arrange
+		LeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		PDDocument pdfDocument = new PDDocument();
+		
+		// Act
+		List<String> response =
+			leitorNotasClear.readContentFromEachPage(
+			pdfDocument
+		);
+		
+		// Assert
+		assertThat(response).isNotNull();
+		assertThat(response).isEmpty();
+	}
+	
+	@Test
+	void test_readContentFromEachPage_OnePageDocument() {
+		// Arrange
+		
+		
+		// Act
+		
+		
+		// Assert
+		fail("Not yet implemented");
+	}
+	
+	@Test
+	void test_readContentFromEachPage_174PagesDocument() {
+		// Arrange
+		LeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		PDDocument pdfDocument = leitorNotasClear.getPdfDocument();
+		
+		// Act
+		List<String> response =
+			leitorNotasClear.readContentFromEachPage(
+			pdfDocument
+		);
+		
+		// Assert
+		assertThat(response).isNotNull();
+		assertThat(response).isNotEmpty();
+		assertThat(response.size()).isEqualTo(174);
 	}
 	
 }

@@ -35,6 +35,7 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 
 	@Override
 	public PDDocument getPdfDocument() {
+		@SuppressWarnings("resource")
 		PDDocument response = new PDDocument();
 		
 		try {
@@ -112,11 +113,8 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 	public String readAllContentFrom(PDDocument pPdfDocument) {
 		String response = "";
 		
-		LeitorNotasCorretagemClear leitorNotasCorretagemClear =
-			new LeitorNotasCorretagemClear();
-		
 		try {
-			response = LeitorPDF.getText( leitorNotasCorretagemClear.getPdfDocument() );
+			response = LeitorPDF.getText( pPdfDocument );
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -159,8 +157,14 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 
 	@Override
 	public List<String> readContentFromEachPage(PDDocument pPdfDocument) {
-		// TODO Auto-generated method stub
-		return null;
+		List<String>	response = new ArrayList<String>();
+		
+		String allData				=	readAllContentFrom(pPdfDocument);
+		if ( allData != null && !allData.isEmpty() ) {
+			response = Arrays.asList( allData.split(PAGE_HEADER) );
+		}
+		
+		return response;
 	}
 	
 
