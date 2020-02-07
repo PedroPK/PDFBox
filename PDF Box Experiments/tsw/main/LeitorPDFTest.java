@@ -43,10 +43,13 @@ public class LeitorPDFTest {
 	@Test
 	public void test_tentarCriarPDDocumentPropostaHabilitacaoPitang() throws InvalidPasswordException, IOException {
 		// Arrange + Act
-		PDDocument documento = LeitorPDF.getPdDocument(PATH_PDF_PROPOSTA_HABILITACAO_PITANG);
+		PDDocument document = LeitorPDF.getPdDocument(PATH_PDF_PROPOSTA_HABILITACAO_PITANG);
 		
 		// Assert
-		assertNotNull(documento);
+		assertNotNull(document);
+		
+		// Avoiding a Warning message in Console.
+		document.close();
 	}
 	
 	@Ignore
@@ -73,10 +76,14 @@ public class LeitorPDFTest {
 	@Test
 	public void test_tentarCriarPDDocumentPolicentroContraCheque_2019_02Fevereiro() throws InvalidPasswordException, IOException {
 		// Arrange + Act
-		PDDocument documento = LeitorPDF.getPdDocument(PATH_PDF_POLICENTRO_CONTRA_CHEQUE_2019_02_FEVEREIRO);
+		PDDocument document = LeitorPDF.getPdDocument(PATH_PDF_POLICENTRO_CONTRA_CHEQUE_2019_02_FEVEREIRO);
 		
-		// assert
-		assertNotNull(documento);
+		// Assert
+		
+		assertNotNull(document);
+		
+		// Avoiding a Warning message in Console.
+		document.close();
 	}
 	
 	@Ignore
@@ -96,15 +103,18 @@ public class LeitorPDFTest {
 	@Test
 	public void test_getPdDocumentEncrypted_NullAndSecurityEnabled() throws InvalidPasswordException, IOException {
 		// Arrange + Act
-		PDDocument documento = 
+		PDDocument document = 
 			LeitorPDF.getPdDocumentEncrypted(
 				PATH_PDF_EXTRATO_B3_2019_03_MARCO,
 				PASSWORD 
 		);
 		
 		// Assert
-		assertNotNull(documento);
-		assertFalse(documento.isAllSecurityToBeRemoved());
+		assertNotNull(document);
+		assertFalse(document.isAllSecurityToBeRemoved());
+		
+		// Avoiding a Warning message in Console.
+		document.close();
 	}
 	
 	@Disabled
@@ -116,10 +126,13 @@ public class LeitorPDFTest {
 		String password = PASSWORD;
 		
 		// Act
-		PDDocument documento = LeitorPDF.removeEncryption(path, password);
+		PDDocument document = LeitorPDF.removeEncryption(path, password);
 		
 		// Assert
-		assertTrue(documento.isAllSecurityToBeRemoved());
+		assertTrue(document.isAllSecurityToBeRemoved());
+		
+		// Avoiding a Warning message in Console.
+		document.close();
 	}
 	
 	@Disabled
@@ -141,20 +154,23 @@ public class LeitorPDFTest {
 	@Test
 	public void test_getPdDocumentEncrypted_DecryptedFileSavedSucessfully() throws InvalidPasswordException, IOException {
 		// Arrange
-		PDDocument documento = 
+		PDDocument document = 
 			LeitorPDF.getPdDocumentEncrypted(
 				PATH_PDF_EXTRATO_B3_2019_03_MARCO,
 				PASSWORD 
 		);
 		
 		// Act
-		documento.setAllSecurityToBeRemoved(true);
+		document.setAllSecurityToBeRemoved(true);
 		
 		File decryptedFile = new File(PATH_PDF_EXTRATO_B3_2019_03_MARCO + "_decrypted");
-		documento.save(decryptedFile);
+		document.save(decryptedFile);
 		
 		// Assert
 		fail("Assert not yet implemented");
+		
+		// Avoiding a Warning message in Console.
+		document.close();
 	}
 	
 	@Test
@@ -197,6 +213,9 @@ public class LeitorPDFTest {
 		
 		// Assert
 		assertThat(page).isNotNull();
+		
+		// Avoiding a Warning message in Console.
+		pdfDocument.close();
 	}
 	
 	@Test
@@ -209,7 +228,6 @@ public class LeitorPDFTest {
 		
 		// Assert
 		assertThat(response).isNotNull();
-		//fail("Not implemented yet");
 	}
 	
 	@Test
@@ -236,7 +254,9 @@ public class LeitorPDFTest {
 		
 		// Assert
 		assertThat(response).isNotNull();
-		//fail("Not implemented yet");
+		
+		// Avoiding a Warning message in Console.
+		pdfDocument.close();
 	}
 	
 	@Test
@@ -250,7 +270,9 @@ public class LeitorPDFTest {
 		
 		// Assert
 		assertThat(response).isEmpty();
-		//fail("Not implemented yet");
+		
+		// Avoiding a Warning message in Console.
+		pdfDocument.close();
 	}
 	
 	@Test
@@ -264,7 +286,9 @@ public class LeitorPDFTest {
 		
 		// Assert
 		assertThat(response).isNotNull();
-		//fail("Not implemented yet");
+		
+		// Avoiding a Warning message in Console.
+		pdfDocument.close();
 	}
 	
 	@Test
@@ -278,7 +302,9 @@ public class LeitorPDFTest {
 		
 		// Assert
 		assertThat(response).isNotEmpty();
-		//fail("Not implemented yet");
+		
+		// Avoiding a Warning message in Console.
+		pdfDocument.close();
 	}
 	
 	@Test
@@ -292,7 +318,9 @@ public class LeitorPDFTest {
 		
 		// Assert
 		assertThat(response.trim()).isNotEmpty();
-		//fail("Not implemented yet");
+		
+		// Avoiding a Warning message in Console.
+		pdfDocument.close();
 	}
 	
 }
