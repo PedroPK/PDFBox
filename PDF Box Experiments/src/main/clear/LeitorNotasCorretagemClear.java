@@ -16,6 +16,8 @@ import main.utils.FilesFoldersUtil;
 
 public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 	
+	private static final String LINE_BREAK = "\n";
+
 	public static final String PAGE_HEADER	=	"NOTA DE CORRETAGEM";
 	
 	public static final String CONTENT_HEADER = "Q D/CValor Operação / AjustePreço / AjusteQuantidadeObs. (*)Especificação do títuloPrazoTipo mercadoC/VNegociação";
@@ -139,10 +141,16 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 	public String readDate(PDDocument pPdfDocument, int pPageNumer) {
 		String response = "";
 		
-		String pageContent = LeitorPDF.getText(pPdfDocument, pPageNumer);
+		String pageContent = "";
+		
+		List<String> eachPageContent = readContentFromEachPage(pPdfDocument);
+		
+		if ( eachPageContent != null && eachPageContent.size() > pPageNumer ) {
+			pageContent = eachPageContent.get(pPageNumer);
+		}
 		
 		if ( pageContent != null && !pageContent.isEmpty() ) {
-			List<String>	lines =  Arrays.asList(pageContent.split("\n"));
+			List<String>	lines =  Arrays.asList(pageContent.split(LINE_BREAK));
 			
 			if ( lines != null && !lines.isEmpty() ) {
 				response = lines.get(2);

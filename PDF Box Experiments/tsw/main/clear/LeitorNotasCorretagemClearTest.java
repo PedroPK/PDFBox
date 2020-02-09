@@ -48,7 +48,7 @@ class LeitorNotasCorretagemClearTest {
 	@Test
 	void testGetRelativePath_SrcMainResources_ContainsSrcMainResources() {
 		// Arrange
-		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		LeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
 		
 		// Act
 		String path = leitorNotasClear.getRelativePath_SrcMainResources();
@@ -306,7 +306,7 @@ class LeitorNotasCorretagemClearTest {
 	@Test
 	void test_readDate_SecondtPage_20July2018() throws IOException {
 		// Arrange
-		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		LeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
 		PDDocument pdfDocument = leitorNotasClear.getPdfDocument();
 		int firstPageNumber = 1;
 		
