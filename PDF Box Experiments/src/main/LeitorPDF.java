@@ -10,6 +10,7 @@ import org.apache.pdfbox.text.PDFTextStripper;
 
 public class LeitorPDF {
 	
+	private static final String IOEXCEPTION_IS_CLOSED_MESSAGE = "COSStream has been closed and cannot be read. Perhaps its enclosing PDDocument has been closed?";
 	public static final String PDF_EXTENSION = ".pdf";
 	
 	public static PDDocument getPdDocument(String pFilePath) throws InvalidPasswordException, IOException {
@@ -181,6 +182,24 @@ public class LeitorPDF {
 		document.save(decryptedFile);
 		
 		document.close();
+	}
+	
+	public static boolean isClosed (PDDocument		pPdfDocument) {
+		boolean response = false;
+		
+		if ( pPdfDocument == null ) {
+			response = true;
+		} else {
+			try {
+				getText(pPdfDocument);
+			} catch ( IOException ioe ) {
+				if ( ioe.getMessage().equals(IOEXCEPTION_IS_CLOSED_MESSAGE) ) {
+					response = true;
+				}
+			}
+		}
+		
+		return response;
 	}
 	
 }

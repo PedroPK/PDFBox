@@ -323,4 +323,55 @@ public class LeitorPDFTest {
 		pdfDocument.close();
 	}
 	
+	@Test
+	public void test_isClosed_nullPdDocument() throws InvalidPasswordException, IOException {
+		// Arrange
+		PDDocument	pdfDocument		=	null;
+		
+		// Act
+		boolean response = LeitorPDF.isClosed(pdfDocument);
+		
+		// Assert
+		assertThat(response).isTrue();
+	}
+	
+	@Test
+	public void test_isClosed_newPdDocument() throws InvalidPasswordException, IOException {
+		// Arrange
+		PDDocument	pdfDocument		=	new PDDocument();
+		
+		// Act
+		boolean response = LeitorPDF.isClosed(pdfDocument);
+		
+		// Assert
+		assertThat(response).isFalse();
+	}
+	
+	@Test
+	public void test_isClosed_notClosedPdDocument() throws InvalidPasswordException, IOException {
+		// Arrange
+		String		path			=	LeitorNotasCorretagemClear.getPathToFirstPdfFile();
+		PDDocument	pdfDocument		=	LeitorPDF.getPdDocument(path);
+		
+		// Act
+		boolean response = LeitorPDF.isClosed(pdfDocument);
+		
+		// Assert
+		assertThat(response).isFalse();
+	}
+	
+	@Test
+	public void test_isClosed_ClosedPdDocument() throws InvalidPasswordException, IOException {
+		// Arrange
+		String		path			=	LeitorNotasCorretagemClear.getPathToFirstPdfFile();
+		PDDocument	pdfDocument		=	LeitorPDF.getPdDocument(path);
+		pdfDocument.close();
+		
+		// Act
+		boolean response = LeitorPDF.isClosed(pdfDocument);
+		
+		// Assert
+		assertThat(response).isTrue();
+	}
+	
 }
