@@ -374,4 +374,29 @@ public class LeitorPDFTest {
 		assertThat(response).isTrue();
 	}
 	
+	/**
+	 * This Test will validate if the method to  know if a PDDocument is Closed is not closing the document itself
+	 * 
+	 * @throws InvalidPasswordException
+	 * @throws IOException
+	 */
+	@Test
+	public void test_isClosed_closedByIsClosed() throws InvalidPasswordException, IOException {
+		// Arrange
+		String		path			=	LeitorNotasCorretagemClear.getPathToFirstPdfFile();
+		PDDocument	pdfDocument		=	LeitorPDF.getPdDocument(path);
+		
+		// Act
+		boolean response = LeitorPDF.isClosed(pdfDocument);
+		
+		// Assert
+		assertThat(response).isFalse();
+		
+		// Act Parte 02
+		response = LeitorPDF.isClosed(pdfDocument);
+		
+		// Assert
+		assertThat(response).isFalse();
+	}
+	
 }

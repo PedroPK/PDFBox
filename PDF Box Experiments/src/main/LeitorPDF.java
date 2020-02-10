@@ -191,7 +191,7 @@ public class LeitorPDF {
 			response = true;
 		} else {
 			try {
-				getText(pPdfDocument);
+				getText(pPdfDocument, false);
 			} catch ( IOException ioe ) {
 				if ( ioe.getMessage().equals(IOEXCEPTION_IS_CLOSED_MESSAGE) ) {
 					response = true;
