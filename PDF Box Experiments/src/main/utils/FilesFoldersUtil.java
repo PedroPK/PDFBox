@@ -100,8 +100,6 @@ public class FilesFoldersUtil {
 		if ( fileOrFolder != null ) {
 			response.add(fileOrFolder);
 			
-			System.out.println(fileOrFolder.getAbsolutePath());
-			
 			if ( fileOrFolder.isDirectory() ) {
 				String[] subsoldersAndOrFiles = fileOrFolder.list();
 				
