@@ -443,4 +443,50 @@ class LeitorNotasCorretagemClearTest {
 		assertThat(response).isEqualTo("08/01/2019");
 	}
 	
+	@Test
+	void test_readOrdersContent_nullPdDocument() {
+		// Arrange
+		PDDocument document = null;
+		int firstPageNumber = 0;
+		
+		// Act
+		String response = aLeitorNotasClear.readOrdersContent(document, firstPageNumber);
+		
+		// Assert
+		assertThat(response).isNotNull();
+		assertThat(response).isEmpty();
+	}
+	
+	@Test
+	void test_readOrdersContent_newPdDocument() {
+		// Arrange
+		PDDocument document = new PDDocument();
+		int firstPageNumber = 0;
+		
+		// Act
+		String response = aLeitorNotasClear.readOrdersContent(document, firstPageNumber);
+		
+		// Assert
+		assertThat(response).isNotNull();
+		assertThat(response).isEmpty();
+	}
+	
+	@Test
+	void test_readOrdersContent_firstPage() {
+		// Arrange
+		int firstPageNumber = 0;
+		
+		// Act
+		String response = aLeitorNotasClear.readOrdersContent(aPdfDocument, firstPageNumber);
+		
+		
+		// Assert
+		String expectedResponse = 
+			"20,50 D20,501ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\r\n" + 
+			"21,00 D21,001ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\r\n" + 
+			"43,00 D43,001ON      NMULTRAPAR01/00FRACIONARIOC1-BOVESPA";
+		
+		assertThat(response).isEqualTo(expectedResponse);
+	}
+	
 }

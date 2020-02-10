@@ -219,6 +219,17 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		}
 		return notEmptyStringResponse;
 	}
+
+	@Override
+	public String readOrdersContent(PDDocument pPdfDocument, int pPageNumer) {
+		return readOrdersContent(pPdfDocument, pPageNumer, true);
+	}
+
+	@Override
+	public String readOrdersContent(PDDocument pPdfDocument, int pPageNumer, boolean pClosePdDocument) {
+		// TODO Auto-generated method stub
+		return "";
+	}
 	
 
 }
