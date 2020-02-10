@@ -12,22 +12,50 @@ import java.util.List;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.junit.Ignore;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import main.LeitorPDF;
 import main.utils.FilesFoldersUtil;
 
 class LeitorNotasCorretagemClearTest {
-
+	
 	private static final String PATH__SRC_MAIN_RESOURCES = "src\\main\\resources\\";
-
+	
+	private static LeitorNotasCorretagemClear	aLeitorNotasClear;
+	private static PDDocument					aPdfDocument;
+	
+	@BeforeAll
+	static void loadPdfDocument() {
+		aLeitorNotasClear	= new LeitorNotasCorretagemClear();
+		aPdfDocument		= aLeitorNotasClear.getPdfDocument();
+	}
+	
+	@AfterAll
+	static void cloesPdfDocument() throws IOException {
+		aPdfDocument.close();;
+	}
+	
+	@BeforeEach
+	void loadPdfDocumentIfClosed() {
+		if (	
+				aPdfDocument == null
+				||
+				LeitorPDF.isClosed(aPdfDocument)
+		) {
+			aPdfDocument = aLeitorNotasClear.getPdfDocument();
+		}
+	}
+	
 	@Test
 	void testGetRelativePath_SrcMainResources_NotNull() {
-		// Arrange
-		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		// Arrange done by @BeforeAll method
 		
 		// Act
-		String path = leitorNotasClear.getRelativePath_SrcMainResources();
+		String path = aLeitorNotasClear.getRelativePath_SrcMainResources();
 		
 		// Assert
 		assertNotNull(path);
@@ -35,11 +63,10 @@ class LeitorNotasCorretagemClearTest {
 	
 	@Test
 	void testGetRelativePath_SrcMainResources_NotEmpty() {
-		// Arrange
-		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		// Arrange done by @BeforeAll method
 		
 		// Act
-		String path = leitorNotasClear.getRelativePath_SrcMainResources();
+		String path = aLeitorNotasClear.getRelativePath_SrcMainResources();
 		
 		// Assert
 		assertFalse(path.isEmpty());
@@ -47,11 +74,10 @@ class LeitorNotasCorretagemClearTest {
 	
 	@Test
 	void testGetRelativePath_SrcMainResources_ContainsSrcMainResources() {
-		// Arrange
-		LeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		// Arrange done by @BeforeAll method
 		
 		// Act
-		String path = leitorNotasClear.getRelativePath_SrcMainResources();
+		String path = aLeitorNotasClear.getRelativePath_SrcMainResources();
 		
 		// Assert
 		assertTrue(path.endsWith(PATH__SRC_MAIN_RESOURCES));
@@ -73,11 +99,10 @@ class LeitorNotasCorretagemClearTest {
 	
 	@Test
 	void testGetPdfDocument_FirstFile_NotNull() throws IOException {
-		// Arrange
-		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		// Arrange done by @BeforeAll method
 		
 		// Act
-		PDDocument document= leitorNotasClear.getPdfDocument();
+		PDDocument document= aLeitorNotasClear.getPdfDocument();
 		
 		// Assert
 		assertNotNull(document);
@@ -88,62 +113,45 @@ class LeitorNotasCorretagemClearTest {
 	
 	@Test
 	void testGetPdfDocument_FirstFile_PageQuantityGreaterThanZero() throws IOException {
-		// Arrange
-		ILeitorNotasCorretagemClear leitorNotasClear	= new LeitorNotasCorretagemClear();
-		PDDocument					pdfDocument			=	leitorNotasClear.getPdfDocument();
+		// Arrange done by @BeforeAll method
 		
 		// Act
-		int result= pdfDocument.getNumberOfPages();
+		int result= aPdfDocument.getNumberOfPages();
 		
 		// Assert
 		assertThat(result).isGreaterThan(0);
-		
-		// Avoiding a Warning message in Console.
-		pdfDocument.close();
 	}
 	
 	@Ignore
 	@Disabled
 	@Test
 	void test_readAllContentFrom_PdfDocument_NotNull() throws IOException {
-		// Arrange
-		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
-		PDDocument					pdfDocument			=	leitorNotasClear.getPdfDocument();
+		// Arrange done by @BeforeAll method
 		
 		// Act
 		String response = 
-			leitorNotasClear.readAllContentFrom(
-			pdfDocument
+			aLeitorNotasClear.readAllContentFrom(
+				aPdfDocument
 		);
 		
 		// Assert
 		assertThat(response).isNotNull();
-		
-		// Avoiding a Warning message in Console.
-		pdfDocument.close();
 	}
 	
 	@Ignore
 	@Disabled
 	@Test
 	void test_readAllContentFrom_PdfDocument_NotEmpty() throws IOException {
-		// Arrange
-		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
-		PDDocument					pdfDocument			=	leitorNotasClear.getPdfDocument();
+		// Arrange done by @BeforeAll method
 		
 		// Act
 		String response =
-			leitorNotasClear.readAllContentFrom(
-			pdfDocument
+			aLeitorNotasClear.readAllContentFrom(
+				aPdfDocument
 		);
 		
 		// Assert
 		assertThat(response).isNotEmpty();
-		
-		// Avoiding a Warning message in Console.
-		pdfDocument.close();
-		
-		System.out.println(response);
 	}
 	
 	@Disabled
@@ -162,11 +170,10 @@ class LeitorNotasCorretagemClearTest {
 	
 	@Test
 	void testGetAllFilesInDirectory_NotNull() {
-		// Arrange
-		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		// Arrange done by @BeforeAll method
 		
 		// Act
-		List<File> result = leitorNotasClear.getAllFilesInDirectory();
+		List<File> result = aLeitorNotasClear.getAllFilesInDirectory();
 		
 		// Assert
 		assertNotNull(result);
@@ -174,11 +181,10 @@ class LeitorNotasCorretagemClearTest {
 	
 	@Test
 	void testGetAllFilesInDirectory_NotEmpty() {
-		// Arrange
-		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		// Arrange done by @BeforeAll method
 		
 		// Act
-		List<File> result = leitorNotasClear.getAllFilesInDirectory();
+		List<File> result = aLeitorNotasClear.getAllFilesInDirectory();
 		
 		// Assert
 		assertFalse(result.isEmpty());
@@ -186,11 +192,10 @@ class LeitorNotasCorretagemClearTest {
 	
 	@Test
 	void testGetAllFilesInDirectory_OnlyFilesOnList() {
-		// Arrange
-		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		// Arrange done by @BeforeAll method
 		
 		// Act
-		List<File> result = leitorNotasClear.getAllFilesInDirectory();
+		List<File> result = aLeitorNotasClear.getAllFilesInDirectory();
 		
 		// Assert
 		for (File file : result) {
@@ -202,11 +207,10 @@ class LeitorNotasCorretagemClearTest {
 	
 	@Test
 	void test_getAllPDF_FilesInDirectory_AllFilesArePDFs() {
-		// Arrange
-		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
+		// Arrange done by @BeforeAll method
 		
 		// Act
-		List<File> result = leitorNotasClear.getAllPDF_FilesInDirectory();
+		List<File> result = aLeitorNotasClear.getAllPDF_FilesInDirectory();
 		
 		// Assert
 		for (File file : result) {
@@ -221,115 +225,63 @@ class LeitorNotasCorretagemClearTest {
 	@Test
 	void test_readPage_FirstPageContent_NotNull() throws IOException {
 		// Arrange
-		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
-		PDDocument pdfDocument = leitorNotasClear.getPdfDocument();
 		int firstPageNumber = 0;
 		
 		// Act
-		String response = leitorNotasClear.readPage(pdfDocument, firstPageNumber);
+		String response = aLeitorNotasClear.readPage(aPdfDocument, firstPageNumber);
 		
 		// Assert
 		assertThat(response).isNotNull();
-		
-		// Avoiding a Warning message in Console.
-		pdfDocument.close();
 	}
 	
 	@Test
 	void test_readPage_FirstPageContent_NotEmpty() throws IOException {
 		// Arrange
-		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
-		PDDocument pdfDocument = leitorNotasClear.getPdfDocument();
 		int firstPageNumber = 0;
 		
 		// Act
-		String response = leitorNotasClear.readPage(pdfDocument, firstPageNumber);
+		String response = aLeitorNotasClear.readPage(aPdfDocument, firstPageNumber);
 		
 		// Assert
 		assertThat(response).isNotEmpty();
 		
-		// Avoiding a Warning message in Console.
-		pdfDocument.close();
 	}
 	
 	@Test
 	void test_readDate_FirstPage_NotNull() throws IOException {
 		// Arrange
-		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
-		PDDocument pdfDocument = leitorNotasClear.getPdfDocument();
 		int firstPageNumber = 0;
 		
 		// Act
-		String response = leitorNotasClear.readDate(pdfDocument, firstPageNumber);
+		String response = aLeitorNotasClear.readDate(aPdfDocument, firstPageNumber);
 		
 		// Assert
 		assertThat(response).isNotNull();
-		
-		// Avoiding a Warning message in Console.
-		pdfDocument.close();
 	}
 	
 	@Test
 	void test_readDate_FirstPage_NotEmpty() throws IOException {
 		// Arrange
-		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
-		PDDocument pdfDocument = leitorNotasClear.getPdfDocument();
 		int firstPageNumber = 0;
 		
 		// Act
-		String response = leitorNotasClear.readDate(pdfDocument, firstPageNumber);
+		String response = aLeitorNotasClear.readDate(aPdfDocument, firstPageNumber);
 		
 		// Assert
 		assertThat(response).isNotEmpty();
-		
-		// Avoiding a Warning message in Console.
-		pdfDocument.close();
 	}
 	
-	@Test
-	void test_readDate_FirstPage_13July2018() throws IOException {
-		// Arrange
-		ILeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
-		PDDocument pdfDocument = leitorNotasClear.getPdfDocument();
-		int firstPageNumber = 0;
-		
-		// Act
-		String response = leitorNotasClear.readDate(pdfDocument, firstPageNumber);
-		
-		// Assert
-		assertThat(response).isEqualTo("13/07/2018");
-		
-		// Avoiding a Warning message in Console.
-		pdfDocument.close();
-	}
 	
-	@Test
-	void test_readDate_SecondtPage_20July2018() throws IOException {
-		// Arrange
-		LeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
-		PDDocument pdfDocument = leitorNotasClear.getPdfDocument();
-		int firstPageNumber = 1;
-		
-		// Act
-		String response = leitorNotasClear.readDate(pdfDocument, firstPageNumber);
-		
-		// Assert
-		assertThat(response).isEqualTo("20/07/2018");
-		
-		// Avoiding a Warning message in Console.
-		pdfDocument.close();
-	}
 	
 	@Test
 	void test_readContentFromEachPage_NullDocument() {
 		// Arrange
-		LeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
 		PDDocument pdfDocument = null;
 		
 		// Act
 		List<String> response =
-			leitorNotasClear.readContentFromEachPage(
-			pdfDocument
+			aLeitorNotasClear.readContentFromEachPage(
+				pdfDocument
 		);
 		
 		// Assert
@@ -340,13 +292,12 @@ class LeitorNotasCorretagemClearTest {
 	@Test
 	void test_readContentFromEachPage_NewEmptyDocument() {
 		// Arrange
-		LeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
 		PDDocument pdfDocument = new PDDocument();
 		
 		// Act
 		List<String> response =
-			leitorNotasClear.readContentFromEachPage(
-			pdfDocument
+			aLeitorNotasClear.readContentFromEachPage(
+				pdfDocument
 		);
 		
 		// Assert
@@ -354,6 +305,8 @@ class LeitorNotasCorretagemClearTest {
 		assertThat(response).isEmpty();
 	}
 	
+	@Ignore
+	@Disabled
 	@Test
 	void test_readContentFromEachPage_OnePageDocument() {
 		// Arrange
@@ -368,20 +321,126 @@ class LeitorNotasCorretagemClearTest {
 	
 	@Test
 	void test_readContentFromEachPage_174PagesDocument() {
-		// Arrange
-		LeitorNotasCorretagemClear leitorNotasClear = new LeitorNotasCorretagemClear();
-		PDDocument pdfDocument = leitorNotasClear.getPdfDocument();
+		// Arrange done by @BeforeAll method
 		
 		// Act
 		List<String> response =
-			leitorNotasClear.readContentFromEachPage(
-			pdfDocument
+			aLeitorNotasClear.readContentFromEachPage(
+				aPdfDocument
 		);
 		
 		// Assert
 		assertThat(response).isNotNull();
 		assertThat(response).isNotEmpty();
 		assertThat(response.size()).isEqualTo(174);
+	}
+	
+	@Test
+	void test_readDate_firstPage_13July2018() throws IOException {
+		// Arrange
+		int firstPageNumber = 0;
+		
+		// Act
+		String response = aLeitorNotasClear.readDate(aPdfDocument, firstPageNumber);
+		
+		// Assert
+		assertThat(response).isEqualTo("13/07/2018");
+	}
+	
+	@Test
+	void test_readDate_secondPage_20July2018() throws IOException {
+		// Arrange
+		int firstPageNumber = 1;
+		
+		// Act
+		String response = aLeitorNotasClear.readDate(aPdfDocument, firstPageNumber);
+		
+		// Assert
+		assertThat(response).isEqualTo("20/07/2018");
+	}
+	
+	@Test
+	void test_readDate_thirdPage_23July2018() throws IOException {
+		// Arrange
+		int firstPageNumber = 2;
+		
+		// Act
+		String response = aLeitorNotasClear.readDate(aPdfDocument, firstPageNumber);
+		
+		// Assert
+		assertThat(response).isEqualTo("23/07/2018");
+	}
+	
+	@Test
+	void test_readDate_fourthPage_31July2018() throws IOException {
+		// Arrange
+		int firstPageNumber = 3;
+		
+		// Act
+		String response = aLeitorNotasClear.readDate(aPdfDocument, firstPageNumber);
+		
+		// Assert
+		assertThat(response).isEqualTo("31/07/2018");
+	}
+	
+	@Test
+	void test_readDate_fifthPage_09August2018() throws IOException {
+		// Arrange
+		int firstPageNumber = 4;
+		
+		// Act
+		String response = aLeitorNotasClear.readDate(aPdfDocument, firstPageNumber);
+		
+		// Assert
+		assertThat(response).isEqualTo("09/08/2018");
+	}
+	
+	@Test
+	void test_readDate_sixthPage_24August2018() throws IOException {
+		// Arrange
+		int firstPageNumber = 5;
+		
+		// Act
+		String response = aLeitorNotasClear.readDate(aPdfDocument, firstPageNumber);
+		
+		// Assert
+		assertThat(response).isEqualTo("24/08/2018");
+	}
+	
+	@Test
+	void test_readDate_fourtyThirdhPage_07January2019() throws IOException {
+		// Arrange
+		int firstPageNumber = 42;
+		
+		// Act
+		String response = aLeitorNotasClear.readDate(aPdfDocument, firstPageNumber);
+		
+		// Assert
+		assertThat(response).isEqualTo("07/01/2019");
+	}
+	
+	@Test
+	void test_readDate_fourtyFourthPage_07January2019() throws IOException {
+		// Arrange
+		int firstPageNumber = 43;
+		
+		// Act
+		String response = aLeitorNotasClear.readDate(aPdfDocument, firstPageNumber);
+		
+		// Assert
+		assertThat(response).isEqualTo("07/01/2019");
+	}
+	
+	@Test
+	void test_readDate_fourtyFifthPage_08January2019() throws IOException {
+		// Arrange
+		int firstPageNumber = 44;
+		
+		// Act
+		String response = aLeitorNotasClear.readDate(aPdfDocument, firstPageNumber);
+		
+		// Assert
+		assertThat(response).isEqualTo("08/01/2019");
 	}
 	
 }
