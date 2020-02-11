@@ -23,8 +23,8 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 	public static final String CONTENT_HEADER_FULL_LINE = "Q D/CValor Operação / AjustePreço / AjusteQuantidadeObs. (*)Especificação do títuloPrazoTipo mercadoC/VNegociação";
 	public static final String CONTENT_HEADER_LAST_TOKEN = "VNegociação\r\n";
 	
-	public static final String CONTENT_FOOTER = "Resumo dos Negócios Resumo Financeiro D/C\r\n";
-
+	public static final String CONTENT_FOOTER = "\r\nResumo dos Negócios Resumo Financeiro D/C\r\n";
+	
 	@Override
 	public String getRelativePath_SrcMainResources() {
 		// TODO Auto-generated method stub
@@ -255,7 +255,13 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		if ( pageContent != null && !pageContent.isEmpty() ) {
 			List<String>	pageSections = Arrays.asList( pageContent.split(CONTENT_HEADER_LAST_TOKEN) );
 			
-			response = pageSections.get(1);
+			String ordersWithoutHeader = pageSections.get(1);
+			
+			pageSections = Arrays.asList( ordersWithoutHeader.split(CONTENT_FOOTER) );
+			
+			String ordersWihtoutHeaderAndFooter = pageSections.get(0);
+			
+			response	=	ordersWihtoutHeaderAndFooter;
 		}
 		
 		return response;
