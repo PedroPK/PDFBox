@@ -252,10 +252,11 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		String response = "";
 		
 		String pageContent = readPage(pPdfDocument, pPageNumer, pClosePdDocument);
-		
-		List<String>	pageSections = Arrays.asList( pageContent.split(CONTENT_HEADER_LAST_TOKEN) );
-		
-		response = pageSections.get(1);
+		if ( pageContent != null && !pageContent.isEmpty() ) {
+			List<String>	pageSections = Arrays.asList( pageContent.split(CONTENT_HEADER_LAST_TOKEN) );
+			
+			response = pageSections.get(1);
+		}
 		
 		return response;
 	}

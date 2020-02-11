@@ -490,6 +490,24 @@ class LeitorNotasCorretagemClearTest {
 	}
 	
 	@Test
+	void test_readOrdersContent_firstPage_endsWith() {
+		// Arrange
+		int firstPageNumber = 0;
+		
+		// Act
+		String response = aLeitorNotasClear.readOrdersContent(aPdfDocument, firstPageNumber);
+		
+		
+		// Assert
+		String expectedResponse = 
+			"20,50 D20,501ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\r\n" + 
+			"21,00 D21,001ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\r\n" + 
+			"43,00 D43,001ON      NMULTRAPAR01/00FRACIONARIOC1-BOVESPA";
+		
+		assertThat(response).endsWith(expectedResponse);
+	}
+	
+	@Test
 	void test_readOrdersContent_firstPage_isEquals() {
 		// Arrange
 		int firstPageNumber = 0;
