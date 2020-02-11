@@ -41,6 +41,12 @@ public interface ILeitorNotasCorretagemClear {
 		int			pPageNumer
 	);
 	
+	public String		readPage(
+		PDDocument	pPdfDocument,
+		int			pPageNumer,
+		boolean		pClosePdDocument
+	);
+	
 	public String		readDate(
 		PDDocument	pPdfDocument,
 		int			pPageNumer

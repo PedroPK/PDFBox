@@ -472,7 +472,25 @@ class LeitorNotasCorretagemClearTest {
 	}
 	
 	@Test
-	void test_readOrdersContent_firstPage() {
+	void test_readOrdersContent_firstPage_startsWith() {
+		// Arrange
+		int firstPageNumber = 0;
+		
+		// Act
+		String response = aLeitorNotasClear.readOrdersContent(aPdfDocument, firstPageNumber);
+		
+		
+		// Assert
+		String expectedResponse = 
+			"20,50 D20,501ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\r\n" + 
+			"21,00 D21,001ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\r\n" + 
+			"43,00 D43,001ON      NMULTRAPAR01/00FRACIONARIOC1-BOVESPA";
+		
+		assertThat(response).startsWith(expectedResponse);
+	}
+	
+	@Test
+	void test_readOrdersContent_firstPage_isEquals() {
 		// Arrange
 		int firstPageNumber = 0;
 		
@@ -487,6 +505,34 @@ class LeitorNotasCorretagemClearTest {
 			"43,00 D43,001ON      NMULTRAPAR01/00FRACIONARIOC1-BOVESPA";
 		
 		assertThat(response).isEqualTo(expectedResponse);
+	}
+	
+	@Test
+	void test_splitPageContentByOrderHeader_notNull() {
+		// Arrange
+		String pageContent = "\\r\\nData pregãoFolhaNr.Nota\\r\\n13/07/20181683423\\r\\nCLEAR CORRETORA - GRUPO XP\\r\\n04543-907 SAO PAULO - SPAv. Presidente Juscelino Kubitschek - Torre Sul, 1909 - 29º ANDARVILA \\r\\nTel. (55 11) 4003-6245  \\r\\natendimento@clear.com.bre-mail :www.clear.com.br SAC: 0800-774-0404Internet :\\r\\nC.N.P.J.: 02.332.886/0011-78 Carta Patente:\\r\\ne-mail ouvidoria: ouvidoria@clear.com.brTel. 0800.774.-0404Ouvidoria :\\r\\n \\r\\nC.P.F./C.N.P.J./C.V.M./C.O.B.Cliente\\r\\n039.821.084-54PEDRO CARLOS FERREIRA SANTOS10201466-\\r\\n AssessorCódigo clienteRUA MARIA JUDITH LINS, 640   BAIRRO NOVO\\r\\n 01-2014665-30853130-080  OLINDA - PE \\r\\nParticipante destino do repasse C.I.ValorCliente Custodiante\\r\\nN- C0,00\\r\\nP. VincComplemento nomeAdministradorAcionistaConta correnteAgênciaBanco\\r\\nN2168501509001\\r\\nNegócios realizados\\r\\nQ D/CValor Operação / AjustePreço / AjusteQuantidadeObs. (*)Especificação do títuloPrazoTipo mercadoC/VNegociação\\r\\n20,50 D20,501ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\\r\\n21,00 D21,001ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\\r\\n43,00 D43,001ON      NMULTRAPAR01/00FRACIONARIOC1-BOVESPA\\r\\nResumo dos Negócios Resumo Financeiro D/C\\r\\n0,00Debêntures Clearing\\r\\n0,00Vendas à vista D84,50Valor líquido das operações\\r\\n84,50Compras à vista D0,02Taxa de liquidação\\r\\n0,00Opções - compras D0,00Taxa de Registro\\r\\n0,00Opções - vendas D84,52Total  CBLC\\r\\n0,00Operações à termo Bolsa\\r\\n0,00Valor das oper. c/ títulos públ. (v. nom.) D0,00Taxa de termo/opções\\r\\n84,50Valor das operações D0,00Taxa A.N.A.\\r\\nD0,00Emolumentos\\r\\n0,00 DTotal Bovespa / Soma\\r\\nEspecificações diversas Corretagem / Despesas\\r\\nClearing D2,40\\r\\nExecução 0,00 DA coluna Q indica liquidação no Agente do Qualificado.\\r\\n0,00Execução casa D\\r\\n0,23ISS  (  SÃO PAULO  )\\r\\nD0,00Outros\\r\\n2,63Total corretagem / Despesas\\r\\nT - Liquidação pelo BrutoA - Posição Futuro(*) - Observações: Líquido para  18/07/2018 87,15 D\\r\\nI - POP Observação:  (1) As operações a termo não são computadas no líquido da faturaC - Clubes e Fundos de Ações 2 - Corretora ou pessoa vinculada atuou na contra parte.\\r\\nP - Carteira Própria # - Negócio direto\\r\\nH - Home Broker 8 - Liquidação Institucional.\\r\\nX - Box D - Day-Trade\\r\\nY - Desmanche de Box F - Cobertura ________________________________________________\\r\\nL - Precatório B - Debêntures CLEAR CORRETORA - GRUPO XP\\r\\n* O campo ISS contempla além do próprio ISS  os valores PIS e COFINS ( ISS 5%, PIS 0,65% e COFINS 4%)\\r\\norrlnota.qrp\\r\\n";
+		
+		
+		// Act
+		String[] pageContentSplited = pageContent.split("VNegociação");
+		
+		
+		// Assert
+		assertThat(pageContentSplited).isNotNull(); 
+	}
+	
+	@Test
+	void test_splitPageContentByOrderHeader_notEmpty() {
+		// Arrange
+		String pageContent = "\\r\\nData pregãoFolhaNr.Nota\\r\\n13/07/20181683423\\r\\nCLEAR CORRETORA - GRUPO XP\\r\\n04543-907 SAO PAULO - SPAv. Presidente Juscelino Kubitschek - Torre Sul, 1909 - 29º ANDARVILA \\r\\nTel. (55 11) 4003-6245  \\r\\natendimento@clear.com.bre-mail :www.clear.com.br SAC: 0800-774-0404Internet :\\r\\nC.N.P.J.: 02.332.886/0011-78 Carta Patente:\\r\\ne-mail ouvidoria: ouvidoria@clear.com.brTel. 0800.774.-0404Ouvidoria :\\r\\n \\r\\nC.P.F./C.N.P.J./C.V.M./C.O.B.Cliente\\r\\n039.821.084-54PEDRO CARLOS FERREIRA SANTOS10201466-\\r\\n AssessorCódigo clienteRUA MARIA JUDITH LINS, 640   BAIRRO NOVO\\r\\n 01-2014665-30853130-080  OLINDA - PE \\r\\nParticipante destino do repasse C.I.ValorCliente Custodiante\\r\\nN- C0,00\\r\\nP. VincComplemento nomeAdministradorAcionistaConta correnteAgênciaBanco\\r\\nN2168501509001\\r\\nNegócios realizados\\r\\nQ D/CValor Operação / AjustePreço / AjusteQuantidadeObs. (*)Especificação do títuloPrazoTipo mercadoC/VNegociação\\r\\n20,50 D20,501ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\\r\\n21,00 D21,001ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\\r\\n43,00 D43,001ON      NMULTRAPAR01/00FRACIONARIOC1-BOVESPA\\r\\nResumo dos Negócios Resumo Financeiro D/C\\r\\n0,00Debêntures Clearing\\r\\n0,00Vendas à vista D84,50Valor líquido das operações\\r\\n84,50Compras à vista D0,02Taxa de liquidação\\r\\n0,00Opções - compras D0,00Taxa de Registro\\r\\n0,00Opções - vendas D84,52Total  CBLC\\r\\n0,00Operações à termo Bolsa\\r\\n0,00Valor das oper. c/ títulos públ. (v. nom.) D0,00Taxa de termo/opções\\r\\n84,50Valor das operações D0,00Taxa A.N.A.\\r\\nD0,00Emolumentos\\r\\n0,00 DTotal Bovespa / Soma\\r\\nEspecificações diversas Corretagem / Despesas\\r\\nClearing D2,40\\r\\nExecução 0,00 DA coluna Q indica liquidação no Agente do Qualificado.\\r\\n0,00Execução casa D\\r\\n0,23ISS  (  SÃO PAULO  )\\r\\nD0,00Outros\\r\\n2,63Total corretagem / Despesas\\r\\nT - Liquidação pelo BrutoA - Posição Futuro(*) - Observações: Líquido para  18/07/2018 87,15 D\\r\\nI - POP Observação:  (1) As operações a termo não são computadas no líquido da faturaC - Clubes e Fundos de Ações 2 - Corretora ou pessoa vinculada atuou na contra parte.\\r\\nP - Carteira Própria # - Negócio direto\\r\\nH - Home Broker 8 - Liquidação Institucional.\\r\\nX - Box D - Day-Trade\\r\\nY - Desmanche de Box F - Cobertura ________________________________________________\\r\\nL - Precatório B - Debêntures CLEAR CORRETORA - GRUPO XP\\r\\n* O campo ISS contempla além do próprio ISS  os valores PIS e COFINS ( ISS 5%, PIS 0,65% e COFINS 4%)\\r\\norrlnota.qrp\\r\\n";
+		
+		
+		// Act
+		String[] pageContentSplited = pageContent.split("VNegociação");
+		
+		
+		// Assert
+		assertThat(pageContentSplited.length).isGreaterThan(0); 
 	}
 	
 }

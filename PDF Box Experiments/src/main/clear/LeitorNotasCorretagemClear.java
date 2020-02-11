@@ -20,7 +20,9 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 
 	public static final String PAGE_HEADER	=	"NOTA DE CORRETAGEM";
 	
-	public static final String CONTENT_HEADER = "Q D/CValor Operação / AjustePreço / AjusteQuantidadeObs. (*)Especificação do títuloPrazoTipo mercadoC/VNegociação";
+	public static final String CONTENT_HEADER_FULL_LINE = "Q D/CValor Operação / AjustePreço / AjusteQuantidadeObs. (*)Especificação do títuloPrazoTipo mercadoC/VNegociação";
+	public static final String CONTENT_HEADER_LAST_TOKEN = "VNegociação\r\n";
+	
 	public static final String CONTENT_FOOTER = "Resumo dos Negócios Resumo Financeiro D/C\r\n";
 
 	@Override
@@ -153,10 +155,29 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 	}
 	
 	@Override
-	public String readPage(PDDocument pPdfDocument, int pPageNumber) {
+	public String readPage(
+		PDDocument	pPdfDocument, 
+		int			pPageNumber
+	) {
+		return 
+			readPage(
+				pPdfDocument,
+				pPageNumber,
+				true);
+	}
+	
+	@Override
+	public String readPage(
+		PDDocument	pPdfDocument, 
+		int			pPageNumber,
+		boolean		pClosePdDocument
+	) {
 		String pageContent = "";
 		
-		List<String> eachPageContent = readContentFromEachPage(pPdfDocument);
+		List<String> eachPageContent = 
+			readContentFromEachPage(
+				pPdfDocument,
+				pClosePdDocument);
 		
 		if ( eachPageContent != null && eachPageContent.size() > pPageNumber ) {
 			pageContent = eachPageContent.get(pPageNumber);
@@ -229,7 +250,12 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 	@Override
 	public String readOrdersContent(PDDocument pPdfDocument, int pPageNumer, boolean pClosePdDocument) {
 		String response = "";
-		//String pageContent = readContentFromEachPage(pPdfDocument, pPageNumer, pClosePdDocument);
+		
+		String pageContent = readPage(pPdfDocument, pPageNumer, pClosePdDocument);
+		
+		List<String>	pageSections = Arrays.asList( pageContent.split(CONTENT_HEADER_LAST_TOKEN) );
+		
+		response = pageSections.get(1);
 		
 		return response;
 	}

@@ -77,7 +77,7 @@ public class LeitorPDF {
 	throws InvalidPasswordException, IOException {
 		String responseText = "";
 		
-		if ( pDocument != null ) {
+		if (	pDocument != null	) {
 			PDFTextStripper pdfStripper = new PDFTextStripper();
 			
 			responseText = pdfStripper.getText(pDocument);
