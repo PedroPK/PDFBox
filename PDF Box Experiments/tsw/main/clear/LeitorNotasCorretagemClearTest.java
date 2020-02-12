@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -651,6 +652,23 @@ class LeitorNotasCorretagemClearTest {
 		
 		// Assert
 		assertThat(response.size()).isEqualTo(3);
+	}
+	
+	@Test
+	void test_readLines_firstPage_comparingLists() {
+		// Arrange
+		int firstPageNumber = 0;
+		
+		// Act
+		List<String> response = aLeitorNotasClear.readLines(aPdfDocument, firstPageNumber);
+		
+		// Assert
+		List<String> expectedResponse = new ArrayList<String>();
+		expectedResponse.add("20,50 D20,501ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA");
+		expectedResponse.add("21,00 D21,001ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA");
+		expectedResponse.add("43,00 D43,001ON      NMULTRAPAR01/00FRACIONARIOC1-BOVESPA");
+			
+		assertThat(response).isEqualTo(expectedResponse);
 	}
 	
 }

@@ -295,6 +295,14 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 				);
 		}
 		
+		// Removing "\r" from each Order Line
+		List<String>	responseWithoutBackCarriage = new ArrayList<String>();
+		for (String orderLine : response) {
+			orderLine = orderLine.replace("\r", "");
+			responseWithoutBackCarriage.add(orderLine);
+		}
+		response = responseWithoutBackCarriage;
+		
 		return response;
 	}
 	
