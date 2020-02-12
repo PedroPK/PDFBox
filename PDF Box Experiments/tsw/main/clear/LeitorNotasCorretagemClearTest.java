@@ -221,6 +221,18 @@ class LeitorNotasCorretagemClearTest {
 			}
 		}
 	}
+	@Test
+	void test_readPage_negativePageNumber_NotNull_and_Empty() throws IOException {
+		// Arrange
+		int firstPageNumber = -1;
+		
+		// Act
+		String response = aLeitorNotasClear.readPage(aPdfDocument, firstPageNumber);
+		
+		// Assert
+		assertThat(response).isNotNull();
+		assertThat(response).isEmpty();
+	}
 	
 	@Test
 	void test_readPage_FirstPageContent_NotNull() throws IOException {
@@ -556,85 +568,89 @@ class LeitorNotasCorretagemClearTest {
 	@Test
 	void test_readLines_NullDocument_NotNullList() {
 		// Arrange
-		
+		PDDocument document = null;
+		int firstPageNumber = 0;
 		
 		// Act
-		
+		List<String> response = aLeitorNotasClear.readLines(document, firstPageNumber);
 		
 		// Assert
-		fail("Not implemented yet");
+		assertThat(response).isNotNull();
 	}
 	
 	@Test
 	void test_readLines_NullDocument_EmptyList() {
 		// Arrange
-		
+		PDDocument document = null;
+		int firstPageNumber = 0;
 		
 		// Act
-		
+		List<String> response = aLeitorNotasClear.readLines(document, firstPageNumber);
 		
 		// Assert
-		fail("Not implemented yet");
+		assertThat(response).isEmpty();
 	}
 	
 	@Test
 	void test_readLines_newDocument_NotNullList() {
 		// Arrange
-		
+		PDDocument document = new PDDocument();
+		int firstPageNumber = 0;
 		
 		// Act
-		
+		List<String> response = aLeitorNotasClear.readLines(document, firstPageNumber);
 		
 		// Assert
-		fail("Not implemented yet");
+		assertThat(response).isNotNull();
 	}
 	
 	@Test
 	void test_readLines_newDocument_EmptyList() {
 		// Arrange
-		
+		PDDocument document = new PDDocument();
+		int firstPageNumber = 0;
 		
 		// Act
-		
+		List<String> response = aLeitorNotasClear.readLines(document, firstPageNumber);
 		
 		// Assert
-		fail("Not implemented yet");
+		assertThat(response).isEmpty();
 	}
 	
 	@Test
 	void test_readLines_firstPage_NotNullList() {
 		// Arrange
-		
+		int firstPageNumber = 0;
 		
 		// Act
-		
+		List<String> response = aLeitorNotasClear.readLines(aPdfDocument, firstPageNumber);
 		
 		// Assert
-		fail("Not implemented yet");
+		assertThat(response).isNotNull();
 	}
 	
 	@Test
 	void test_readLines_firstPage_NotEmptyList() {
 		// Arrange
-		
+		int firstPageNumber = 0;
 		
 		// Act
-		
+		List<String> response = aLeitorNotasClear.readLines(aPdfDocument, firstPageNumber);
 		
 		// Assert
-		fail("Not implemented yet");
+		assertThat(response).isNotEmpty();
 	}
 	
 	@Test
 	void test_readLines_firstPage_sizeEquals3() {
 		// Arrange
-		
+		int firstPageNumber = 0;
 		
 		// Act
-		
+		List<String> response = aLeitorNotasClear.readLines(aPdfDocument, firstPageNumber);
 		
 		// Assert
-		fail("Not implemented yet");
+		assertThat(response.size()).isEqualTo(3);
 	}
 	
 }

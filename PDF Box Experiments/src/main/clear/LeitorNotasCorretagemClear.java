@@ -270,15 +270,20 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		return response;
 	}
 	
-	@Override
-	public List<String> readLines() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 	public boolean isListValid(List<String> pPageSections) {
 		return pPageSections != null		&&
 		!pPageSections.isEmpty();
+	}
+
+	@Override
+	public List<String> readLines(PDDocument pPdfDocument, int pPageNumer) {
+		return readLines(pPdfDocument, pPageNumer, true);
+	}
+
+	@Override
+	public List<String> readLines(PDDocument pPdfDocument, int pPageNumer, boolean pClosePdDocument) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 
