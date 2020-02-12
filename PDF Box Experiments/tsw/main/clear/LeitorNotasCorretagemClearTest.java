@@ -553,4 +553,88 @@ class LeitorNotasCorretagemClearTest {
 		assertThat(pageContentSplited.length).isGreaterThan(0); 
 	}
 	
+	@Test
+	void test_readLines_NullDocument_NotNullList() {
+		// Arrange
+		
+		
+		// Act
+		
+		
+		// Assert
+		fail("Not implemented yet");
+	}
+	
+	@Test
+	void test_readLines_NullDocument_EmptyList() {
+		// Arrange
+		
+		
+		// Act
+		
+		
+		// Assert
+		fail("Not implemented yet");
+	}
+	
+	@Test
+	void test_readLines_newDocument_NotNullList() {
+		// Arrange
+		
+		
+		// Act
+		
+		
+		// Assert
+		fail("Not implemented yet");
+	}
+	
+	@Test
+	void test_readLines_newDocument_EmptyList() {
+		// Arrange
+		
+		
+		// Act
+		
+		
+		// Assert
+		fail("Not implemented yet");
+	}
+	
+	@Test
+	void test_readLines_firstPage_NotNullList() {
+		// Arrange
+		
+		
+		// Act
+		
+		
+		// Assert
+		fail("Not implemented yet");
+	}
+	
+	@Test
+	void test_readLines_firstPage_NotEmptyList() {
+		// Arrange
+		
+		
+		// Act
+		
+		
+		// Assert
+		fail("Not implemented yet");
+	}
+	
+	@Test
+	void test_readLines_firstPage_sizeEquals3() {
+		// Arrange
+		
+		
+		// Act
+		
+		
+		// Assert
+		fail("Not implemented yet");
+	}
+	
 }
