@@ -61,6 +61,6 @@ public interface ILeitorNotasCorretagemClear {
 		int			pPageNumer,
 		boolean		pClosePdDocument);
 	
-	public String		readLine();
+	public List<String>		readLines();
 	
 }

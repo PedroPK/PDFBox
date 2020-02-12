@@ -59,13 +59,7 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		
 		return response;
 	}
-
-	@Override
-	public String readLine() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 	@Override
 	public File getDirectory() {
 		// TODO Auto-generated method stub
@@ -275,7 +269,13 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		
 		return response;
 	}
-
+	
+	@Override
+	public List<String> readLines() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	public boolean isListValid(List<String> pPageSections) {
 		return pPageSections != null		&&
 		!pPageSections.isEmpty();
