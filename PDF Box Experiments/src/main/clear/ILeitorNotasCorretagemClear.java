@@ -6,6 +6,8 @@ import java.util.List;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 
+import seleniumWebDriver.entities.StockOrder;
+
 public interface ILeitorNotasCorretagemClear {
 	
 	public String		getRelativePath_SrcMainResources();
@@ -69,6 +71,32 @@ public interface ILeitorNotasCorretagemClear {
 	public List<String>		readLines(
 		PDDocument	pPdfDocument,
 		int			pPageNumer,
+		boolean		pClosePdDocument
+	);
+	
+	public String			readLine(
+		PDDocument	pPdfDocument,
+		int			pPageNumer,
+		int			pLineNumber
+	);
+	
+	public String			readLine(
+		PDDocument	pPdfDocument,
+		int			pPageNumer,
+		int			pLineNumber,
+		boolean		pClosePdDocument
+	);
+	
+	public StockOrder		readStockOrder(
+		PDDocument	pPdfDocument,
+		int			pPageNumer,
+		int			pLineNumber
+	);
+	
+	public StockOrder		readStockOrder(
+		PDDocument	pPdfDocument,
+		int			pPageNumer,
+		int			pLineNumber,
 		boolean		pClosePdDocument
 	);
 	

@@ -12,6 +12,7 @@ import org.apache.pdfbox.pdmodel.PDPage;
 
 import main.LeitorPDF;
 import main.utils.FilesFoldersUtil;
+import seleniumWebDriver.entities.StockOrder;
 
 
 public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
@@ -296,6 +297,37 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		return response;
 	}
 	
+	@Override
+	public String readLine(PDDocument pPdfDocument, int pPageNumer, int pLineNumber) {
+		return readLine(pPdfDocument, pPageNumer, pLineNumber, true);
+	}
+
+	@Override
+	public String readLine(PDDocument pPdfDocument, int pPageNumer, int pLineNumber, boolean pClosePdDocument) {
+		String response = "";
+		
+		List<String>	lines	=	readLines(pPdfDocument, pPageNumer, pClosePdDocument);
+		
+		if ( isListValid(lines) && lines.size() > pLineNumber ) {
+			response = lines.get(pLineNumber);
+		}
+		
+		return response;
+	}
+
+	@Override
+	public StockOrder readStockOrder(PDDocument pPdfDocument, int pPageNumer, int pLineNumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public StockOrder readStockOrder(PDDocument pPdfDocument, int pPageNumer, int pLineNumber,
+			boolean pClosePdDocument) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	private static boolean isListValid(List<String> pPageSections) {
 		return pPageSections != null		&&
 		!pPageSections.isEmpty();
@@ -311,5 +343,4 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		return pListWithReturnCarriage;
 	}
 	
-
 }

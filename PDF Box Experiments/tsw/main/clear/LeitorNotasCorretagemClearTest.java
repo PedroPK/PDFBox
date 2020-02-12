@@ -24,6 +24,12 @@ import main.utils.FilesFoldersUtil;
 
 class LeitorNotasCorretagemClearTest {
 	
+	private static final String THIRD_ORDER_FIRST_PAGE = "43,00 D43,001ON      NMULTRAPAR01/00FRACIONARIOC1-BOVESPA";
+
+	private static final String SECOND_ORDER_FIRST_PAGE = "21,00 D21,001ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA";
+
+	private static final String FIRST_ORDER_FIRST_PAGE = "20,50 D20,501ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA";
+
 	private static final String PATH__SRC_MAIN_RESOURCES = "src\\main\\resources\\";
 	
 	private static LeitorNotasCorretagemClear	aLeitorNotasClear;
@@ -497,7 +503,7 @@ class LeitorNotasCorretagemClearTest {
 		String expectedResponse = 
 			"20,50 D20,501ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\r\n" + 
 			"21,00 D21,001ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\r\n" + 
-			"43,00 D43,001ON      NMULTRAPAR01/00FRACIONARIOC1-BOVESPA";
+			THIRD_ORDER_FIRST_PAGE;
 		
 		assertThat(response).startsWith(expectedResponse);
 	}
@@ -515,7 +521,7 @@ class LeitorNotasCorretagemClearTest {
 		String expectedResponse = 
 			"20,50 D20,501ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\r\n" + 
 			"21,00 D21,001ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\r\n" + 
-			"43,00 D43,001ON      NMULTRAPAR01/00FRACIONARIOC1-BOVESPA";
+			THIRD_ORDER_FIRST_PAGE;
 		
 		assertThat(response).endsWith(expectedResponse);
 	}
@@ -533,7 +539,7 @@ class LeitorNotasCorretagemClearTest {
 		String expectedResponse = 
 			"20,50 D20,501ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\r\n" + 
 			"21,00 D21,001ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\r\n" + 
-			"43,00 D43,001ON      NMULTRAPAR01/00FRACIONARIOC1-BOVESPA";
+			THIRD_ORDER_FIRST_PAGE;
 		
 		assertThat(response).isEqualTo(expectedResponse);
 	}
@@ -664,11 +670,146 @@ class LeitorNotasCorretagemClearTest {
 		
 		// Assert
 		List<String> expectedResponse = new ArrayList<String>();
-		expectedResponse.add("20,50 D20,501ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA");
-		expectedResponse.add("21,00 D21,001ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA");
-		expectedResponse.add("43,00 D43,001ON      NMULTRAPAR01/00FRACIONARIOC1-BOVESPA");
-			
+		expectedResponse.add(FIRST_ORDER_FIRST_PAGE);
+		expectedResponse.add(SECOND_ORDER_FIRST_PAGE);
+		expectedResponse.add(THIRD_ORDER_FIRST_PAGE);
+		
 		assertThat(response).isEqualTo(expectedResponse);
 	}
 	
+	@Test
+	void test_readLine_NullDocument_NotNullString() {
+		// Arrange
+		PDDocument document	=	null;
+		int firstPageNumber	=	0;
+		int firstLineNumber	=	0;
+		
+		// Act
+		String response		=	
+			aLeitorNotasClear.readLine(
+				document, 
+				firstPageNumber, firstLineNumber);
+		
+		// Assert
+		assertThat(response).isNotNull();
+	}
+	
+	@Test
+	void test_readLine_NullDocument_EmptyString() {
+		// Arrange
+		PDDocument document	=	null;
+		int firstPageNumber	=	0;
+		int firstLineNumber	=	0;
+		
+		// Act
+		String response		=	
+			aLeitorNotasClear.readLine(
+				document, 
+				firstPageNumber, firstLineNumber);
+		
+		// Assert
+		assertThat(response).isEmpty();
+	}
+	
+	@Test
+	void test_readLine_newDocument_NotNullString() {
+		// Arrange
+		PDDocument document	=	new PDDocument();
+		int firstPageNumber	=	0;
+		int firstLineNumber	=	0;
+		
+		// Act
+		String response		=	
+			aLeitorNotasClear.readLine(
+				document, 
+				firstPageNumber, firstLineNumber);
+		
+		// Assert
+		assertThat(response).isNotNull();
+	}
+	
+	@Test
+	void test_readLine_newDocument_EmptyString() {
+		// Arrange
+		PDDocument document	=	new PDDocument();
+		int firstPageNumber	=	0;
+		int firstLineNumber	=	0;
+		
+		// Act
+		String response		=	
+			aLeitorNotasClear.readLine(
+				document, 
+				firstPageNumber, firstLineNumber);
+		
+		// Assert
+		assertThat(response).isEmpty();
+	}
+	
+	@Test
+	void test_readLine_firstPage_NotNullString() {
+		// Arrange
+		PDDocument document	=	aPdfDocument;
+		int firstPageNumber	=	0;
+		int firstLineNumber	=	0;
+		
+		// Act
+		String response		=	
+			aLeitorNotasClear.readLine(
+				document, 
+				firstPageNumber, firstLineNumber);
+		
+		// Assert
+		assertThat(response).isNotNull();
+	}
+	
+	@Test
+	void test_readLine_firstPage_NotEmptyString() {
+		// Arrange
+		PDDocument document	=	aPdfDocument;
+		int firstPageNumber	=	0;
+		int firstLineNumber	=	0;
+		
+		// Act
+		String response		=	
+			aLeitorNotasClear.readLine(
+				document, 
+				firstPageNumber, firstLineNumber);
+		
+		// Assert
+		assertThat(response).isNotEmpty();
+	}
+	
+	@Test
+	void test_readLine_firstPage_DontHaveLineBreakAtString() {
+		// Arrange
+		PDDocument document	=	aPdfDocument;
+		int firstPageNumber	=	0;
+		int firstLineNumber	=	0;
+		
+		// Act
+		String response		=	
+			aLeitorNotasClear.readLine(
+				document, 
+				firstPageNumber, firstLineNumber);
+		
+		// Assert
+		assertThat(response).doesNotContain("\n");
+	}
+	
+	@Test
+	void test_readLine_firstPage_equals() {
+		// Arrange
+		PDDocument document	=	aPdfDocument;
+		int firstPageNumber	=	0;
+		int firstLineNumber	=	0;
+		
+		// Act
+		String response		=	
+			aLeitorNotasClear.readLine(
+				document, 
+				firstPageNumber, firstLineNumber);
+		
+		// Assert
+		assertThat(response).isEqualTo(FIRST_ORDER_FIRST_PAGE);
+	}
 }
