@@ -194,7 +194,7 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		if ( pageContent != null && !pageContent.isEmpty() ) {
 			List<String>	lines =  Arrays.asList(pageContent.split(LINE_BREAK));
 			
-			if ( lines != null && !lines.isEmpty() ) {
+			if ( isListValid(lines) ) {
 				response = lines.get(2);
 				
 				if ( response != null && response.length() > 10 ) {
@@ -255,16 +255,30 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		if ( pageContent != null && !pageContent.isEmpty() ) {
 			List<String>	pageSections = Arrays.asList( pageContent.split(CONTENT_HEADER_LAST_TOKEN) );
 			
-			String ordersWithoutHeader = pageSections.get(1);
-			
-			pageSections = Arrays.asList( ordersWithoutHeader.split(CONTENT_FOOTER) );
-			
-			String ordersWihtoutHeaderAndFooter = pageSections.get(0);
-			
-			response	=	ordersWihtoutHeaderAndFooter;
+			if ( 
+					isListValid(pageSections)		&&
+					pageSections.size() > 1
+			) {
+				// Removing the Content Header
+				String ordersWithoutHeader = pageSections.get(1);
+				
+				pageSections = Arrays.asList( ordersWithoutHeader.split(CONTENT_FOOTER) );
+				
+				if (	isListValid(pageSections)	) {
+					// Removing the Content Footer
+					String ordersWihtoutHeaderAndFooter = pageSections.get(0);
+					
+					response	=	ordersWihtoutHeaderAndFooter;
+				}
+			}
 		}
 		
 		return response;
+	}
+
+	public boolean isListValid(List<String> pPageSections) {
+		return pPageSections != null		&&
+		!pPageSections.isEmpty();
 	}
 	
 
