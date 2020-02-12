@@ -291,7 +291,7 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		}
 		
 		// Removing "\r" from each Order Line
-		response = removeBackCarriageFromEachString(response);
+		response = removeCarriageReturnFromEachString(response);
 		
 		return response;
 	}
@@ -301,7 +301,7 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		!pPageSections.isEmpty();
 	}
 	
-	private static List<String> removeBackCarriageFromEachString(List<String> pListWithReturnCarriage) {
+	private static List<String> removeCarriageReturnFromEachString(List<String> pListWithReturnCarriage) {
 		List<String>	responseWithoutBackCarriage = new ArrayList<String>();
 		for (String orderLine : pListWithReturnCarriage) {
 			orderLine = orderLine.replace("\r", "");
