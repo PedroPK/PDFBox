@@ -272,11 +272,6 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		return response;
 	}
 	
-	public boolean isListValid(List<String> pPageSections) {
-		return pPageSections != null		&&
-		!pPageSections.isEmpty();
-	}
-
 	@Override
 	public List<String> readLines(PDDocument pPdfDocument, int pPageNumer) {
 		return readLines(pPdfDocument, pPageNumer, true);
@@ -296,14 +291,24 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		}
 		
 		// Removing "\r" from each Order Line
+		response = removeBackCarriageFromEachString(response);
+		
+		return response;
+	}
+	
+	private static boolean isListValid(List<String> pPageSections) {
+		return pPageSections != null		&&
+		!pPageSections.isEmpty();
+	}
+	
+	private static List<String> removeBackCarriageFromEachString(List<String> pListWithReturnCarriage) {
 		List<String>	responseWithoutBackCarriage = new ArrayList<String>();
-		for (String orderLine : response) {
+		for (String orderLine : pListWithReturnCarriage) {
 			orderLine = orderLine.replace("\r", "");
 			responseWithoutBackCarriage.add(orderLine);
 		}
-		response = responseWithoutBackCarriage;
-		
-		return response;
+		pListWithReturnCarriage = responseWithoutBackCarriage;
+		return pListWithReturnCarriage;
 	}
 	
 
