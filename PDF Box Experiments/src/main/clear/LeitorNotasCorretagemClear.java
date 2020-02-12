@@ -168,13 +168,15 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 	) {
 		String pageContent = "";
 		
-		List<String> eachPageContent = 
-			readContentFromEachPage(
-				pPdfDocument,
-				pClosePdDocument);
-		
-		if ( eachPageContent != null && eachPageContent.size() > pPageNumber ) {
-			pageContent = eachPageContent.get(pPageNumber);
+		if ( pPageNumber >= 0 ) {
+			List<String> eachPageContent = 
+				readContentFromEachPage(
+					pPdfDocument,
+					pClosePdDocument);
+			
+			if ( eachPageContent != null && eachPageContent.size() > pPageNumber ) {
+				pageContent = eachPageContent.get(pPageNumber);
+			}
 		}
 		return pageContent;
 	}
@@ -282,8 +284,18 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 
 	@Override
 	public List<String> readLines(PDDocument pPdfDocument, int pPageNumer, boolean pClosePdDocument) {
-		// TODO Auto-generated method stub
-		return null;
+		List<String>	response	= new ArrayList<String>();
+		
+		String ordersContent = readOrdersContent(pPdfDocument, pPageNumer, pClosePdDocument);
+		
+		if ( ordersContent != null && !ordersContent.isEmpty() ) {
+			response = 
+				Arrays.asList(
+					ordersContent.split("\n")
+				);
+		}
+		
+		return response;
 	}
 	
 
