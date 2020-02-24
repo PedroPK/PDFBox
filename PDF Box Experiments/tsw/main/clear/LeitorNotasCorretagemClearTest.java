@@ -840,4 +840,26 @@ class LeitorNotasCorretagemClearTest {
 		assertThat(response).isEqualTo(expectedResponse);
 	}
 	
+	@Test
+	void test_readSecondOrderTypeFromLine_from_FirstPage_FirstLine() {
+		// Arrange
+		PDDocument document	=	aPdfDocument;
+		int firstPageNumber	=	0;
+		int firstLineNumber	=	0;
+		
+		// Act
+		String response =
+			aLeitorNotasClear.readSecondOrderTypeFromLine(
+				document,
+				firstPageNumber,
+				firstLineNumber
+		);
+		
+		// Assert
+		String expectedResponse = "D";
+		assertThat(response).isNotNull();
+		assertThat(response).isNotEmpty();
+		assertThat(response).isEqualTo(expectedResponse);
+	}
+	
 }

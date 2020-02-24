@@ -129,17 +129,17 @@ public interface ILeitorNotasCorretagemClear {
 		boolean		pClosePdDocument
 	);
 	
-	public String			readSecondValueFromLine(
+	public String			readSecondOrderTypeFromLine(
 		String		pLine
 	);
 	
-	public String			readSecondValueFromLine(
+	public String			readSecondOrderTypeFromLine(
 		PDDocument	pPdfDocument,
 		int			pPageNumer,
 		int			pLineNumber
 	);
 	
-	public String			readSecondValueFromLine(
+	public String			readSecondOrderTypeFromLine(
 		PDDocument	pPdfDocument,
 		int			pPageNumer,
 		int			pLineNumber,

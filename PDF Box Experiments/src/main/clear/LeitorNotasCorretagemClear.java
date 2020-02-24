@@ -382,6 +382,21 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 
 	@Override
 	public String readFirstValueFromLine(PDDocument pPdfDocument, int pPageNumer, int pLineNumber) {
+		return
+			readFirstValueFromLine(
+				pPdfDocument, 
+				pPageNumer, 
+				pLineNumber, 
+				true);
+	}
+
+	@Override
+	public String readFirstValueFromLine(
+		PDDocument	pPdfDocument, 
+		int			pPageNumer, 
+		int			pLineNumber,
+		boolean		pClosePdDocument
+	) {
 		String response = "";
 		
 		List<String> tokensList = StringUtils.split(readLine(pPdfDocument, pPageNumer, pLineNumber), SINGLE_SPACE);
@@ -389,33 +404,37 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		if ( tokensList != null && !tokensList.isEmpty() ) {
 			response = tokensList.get(0);
 		}
+		
 		return response;
 	}
 
 	@Override
-	public String readFirstValueFromLine(PDDocument pPdfDocument, int pPageNumer, int pLineNumber,
-			boolean pClosePdDocument) {
+	public String readSecondOrderTypeFromLine(String pLine) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public String readSecondValueFromLine(String pLine) {
-		// TODO Auto-generated method stub
-		return null;
+	public String readSecondOrderTypeFromLine(PDDocument pPdfDocument, int pPageNumer, int pLineNumber) {
+		return readSecondOrderTypeFromLine(pPdfDocument, pPageNumer, pLineNumber, true);
 	}
 
 	@Override
-	public String readSecondValueFromLine(PDDocument pPdfDocument, int pPageNumer, int pLineNumber) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String readSecondValueFromLine(PDDocument pPdfDocument, int pPageNumer, int pLineNumber,
-			boolean pClosePdDocument) {
-		// TODO Auto-generated method stub
-		return null;
+	public String readSecondOrderTypeFromLine(
+		PDDocument		pPdfDocument, 
+		int				pPageNumer, 
+		int				pLineNumber,
+		boolean			pClosePdDocument
+	) {
+		String response = "";
+		
+		List<String> tokensList = StringUtils.split(readLine(pPdfDocument, pPageNumer, pLineNumber), SINGLE_SPACE);
+		
+		if ( tokensList != null && !tokensList.isEmpty() && tokensList.size() >= 2 ) {
+			response = tokensList.get(1).substring(0, 1);
+		}
+		
+		return response;
 	}
 	
 }
