@@ -10,13 +10,17 @@ import java.util.List;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 
+import difflib.StringUtills;
 import main.LeitorPDF;
 import main.utils.FilesFoldersUtil;
+import main.utils.StringUtils;
 import seleniumWebDriver.entities.StockOrder;
 
 
 public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 	
+	private static final String SINGLE_SPACE = " ";
+
 	private static final String LINE_BREAK = "\n";
 
 	public static final String PAGE_HEADER	=	"NOTA DE CORRETAGEM";
@@ -188,8 +192,10 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		
 		String pageContent = readPage(pPdfDocument, pPageNumber);
 		
-		if ( pageContent != null && !pageContent.isEmpty() ) {
-			List<String>	lines =  Arrays.asList(pageContent.split(LINE_BREAK));
+		if ( isValid(pageContent) ) {
+			String splitToken = LINE_BREAK;
+			
+			List<String> lines = StringUtils.split(pageContent, splitToken);
 			
 			if ( isListValid(lines) ) {
 				response = lines.get(2);
@@ -216,7 +222,7 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		List<String>	response = new ArrayList<String>();
 		
 		String allData				=	readAllContentFrom(pPdfDocument);
-		if ( allData != null && !allData.isEmpty() ) {
+		if ( isValid(allData) ) {
 			response = Arrays.asList( allData.split(PAGE_HEADER) );
 		}
 		
@@ -249,7 +255,7 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		String response = "";
 		
 		String pageContent = readPage(pPdfDocument, pPageNumer, pClosePdDocument);
-		if ( pageContent != null && !pageContent.isEmpty() ) {
+		if ( isValid(pageContent) ) {
 			List<String>	pageSections = Arrays.asList( pageContent.split(CONTENT_HEADER_LAST_TOKEN) );
 			
 			if ( 
@@ -284,7 +290,7 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		
 		String ordersContent = readOrdersContent(pPdfDocument, pPageNumer, pClosePdDocument);
 		
-		if ( ordersContent != null && !ordersContent.isEmpty() ) {
+		if ( isValid(ordersContent) ) {
 			response = 
 				Arrays.asList(
 					ordersContent.split("\n")
@@ -317,8 +323,17 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 
 	@Override
 	public StockOrder readStockOrder(PDDocument pPdfDocument, int pPageNumer, int pLineNumber) {
-		// TODO Auto-generated method stub
-		return null;
+		StockOrder		response	=	null;
+		
+		String stockLine	=	readLine(pPdfDocument, pPageNumer, pLineNumber);
+		
+		if ( isValid(stockLine) ) {
+			
+		}
+		
+		//response	=	new StockOrder(pYear, pMonth, pDay, pHour, pMinute, pSecond, pTicker, pQuantity, pPrice, pOrderType)
+		
+		return response;
 	}
 
 	@Override
@@ -326,6 +341,10 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 			boolean pClosePdDocument) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public boolean isValid(String pOrdersContent) {
+		return pOrdersContent != null && !pOrdersContent.isEmpty();
 	}
 	
 	private static boolean isListValid(List<String> pPageSections) {
@@ -341,6 +360,62 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		}
 		pListWithReturnCarriage = responseWithoutBackCarriage;
 		return pListWithReturnCarriage;
+	}
+
+	@Override
+	public String readOrderType(PDDocument pPdfDocument, int pPageNumer, int pLineNumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String readStockName(PDDocument pPdfDocument, int pPageNumer, int pLineNumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String readFirstValueFromLine(String pLine) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String readFirstValueFromLine(PDDocument pPdfDocument, int pPageNumer, int pLineNumber) {
+		String response = "";
+		
+		List<String> tokensList = StringUtils.split(readLine(pPdfDocument, pPageNumer, pLineNumber), SINGLE_SPACE);
+		
+		if ( tokensList != null && !tokensList.isEmpty() ) {
+			response = tokensList.get(0);
+		}
+		return response;
+	}
+
+	@Override
+	public String readFirstValueFromLine(PDDocument pPdfDocument, int pPageNumer, int pLineNumber,
+			boolean pClosePdDocument) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String readSecondValueFromLine(String pLine) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String readSecondValueFromLine(PDDocument pPdfDocument, int pPageNumer, int pLineNumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String readSecondValueFromLine(PDDocument pPdfDocument, int pPageNumer, int pLineNumber,
+			boolean pClosePdDocument) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

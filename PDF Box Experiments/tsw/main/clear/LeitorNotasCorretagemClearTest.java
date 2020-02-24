@@ -24,11 +24,16 @@ import main.utils.FilesFoldersUtil;
 
 class LeitorNotasCorretagemClearTest {
 	
-	private static final String THIRD_ORDER_FIRST_PAGE = "43,00 D43,001ON      NMULTRAPAR01/00FRACIONARIOC1-BOVESPA";
+	private static final String THIRD_ORDER_FIRST_PAGE		= "43,00 D43,001ON      NMULTRAPAR01/00FRACIONARIOC1-BOVESPA";
 
-	private static final String SECOND_ORDER_FIRST_PAGE = "21,00 D21,001ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA";
+	private static final String SECOND_ORDER_FIRST_PAGE		= "21,00 D21,001ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA";
 
-	private static final String FIRST_ORDER_FIRST_PAGE = "20,50 D20,501ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA";
+	private static final String FIRST_ORDER_FIRST_PAGE		= "20,50 D20,501ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA";
+	
+	private static final String REMOVE_TOKEN_BOVESPA		= "1-BOVESPA";
+	private static final String REMOVE_TOKEN_FRACIONARIO	= "FRACIONARIO";
+	private static final String REMOVE_TOKEN_PRAZO			= "01/00";
+	private static final String REMOVE_TOKEN_ON_NM			= "ON      NM";
 
 	private static final String PATH__SRC_MAIN_RESOURCES = "src\\main\\resources\\";
 	
@@ -812,4 +817,27 @@ class LeitorNotasCorretagemClearTest {
 		// Assert
 		assertThat(response).isEqualTo(FIRST_ORDER_FIRST_PAGE);
 	}
+	
+	@Test
+	void test_readFirstValueFromLine_from_FirstPage_FirstLine() {
+		// Arrange
+		PDDocument document	=	aPdfDocument;
+		int firstPageNumber	=	0;
+		int firstLineNumber	=	0;
+		
+		// Act
+		String response =
+			aLeitorNotasClear.readFirstValueFromLine(
+				document,
+				firstPageNumber,
+				firstLineNumber
+		);
+		
+		// Assert
+		String expectedResponse = "20,50";
+		assertThat(response).isNotNull();
+		assertThat(response).isNotEmpty();
+		assertThat(response).isEqualTo(expectedResponse);
+	}
+	
 }

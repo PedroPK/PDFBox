@@ -100,4 +100,50 @@ public interface ILeitorNotasCorretagemClear {
 		boolean		pClosePdDocument
 	);
 	
+	public String			readOrderType(
+		PDDocument	pPdfDocument,
+		int			pPageNumer,
+		int			pLineNumber
+	);
+	
+	public String			readStockName(
+		PDDocument	pPdfDocument,
+		int			pPageNumer,
+		int			pLineNumber
+	);
+	
+	public String			readFirstValueFromLine(
+		String		pLine
+	);
+	
+	public String			readFirstValueFromLine(
+		PDDocument	pPdfDocument,
+		int			pPageNumer,
+		int			pLineNumber
+	);
+	
+	public String			readFirstValueFromLine(
+		PDDocument	pPdfDocument,
+		int			pPageNumer,
+		int			pLineNumber,
+		boolean		pClosePdDocument
+	);
+	
+	public String			readSecondValueFromLine(
+		String		pLine
+	);
+	
+	public String			readSecondValueFromLine(
+		PDDocument	pPdfDocument,
+		int			pPageNumer,
+		int			pLineNumber
+	);
+	
+	public String			readSecondValueFromLine(
+		PDDocument	pPdfDocument,
+		int			pPageNumer,
+		int			pLineNumber,
+		boolean		pClosePdDocument
+	);
+	
 }
