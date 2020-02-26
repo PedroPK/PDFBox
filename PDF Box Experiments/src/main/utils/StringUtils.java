@@ -2,6 +2,7 @@ package main.utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class StringUtils {
@@ -20,4 +21,18 @@ public class StringUtils {
 		pListWithReturnCarriage = responseWithoutBackCarriage;
 		return pListWithReturnCarriage;
 	}
+	
+	public static List<String> removeEmptyStrings(List<String> pList) {
+		List<String>	notEmptyStringResponse = new ArrayList<String>();
+		Iterator<String> iterator = pList.iterator();
+		while ( iterator.hasNext() ) {
+			String token = iterator.next();
+			
+			if ( !token.isEmpty() ) {
+				notEmptyStringResponse.add(token);
+			}
+		}
+		return notEmptyStringResponse;
+	}
+	
 }
