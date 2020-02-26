@@ -10,7 +10,7 @@ public class GeneralUtils {
 	}
 	
 	public static boolean isValid(String pOrdersContent) {
-		return pOrdersContent != null && !pOrdersContent.isEmpty();
+		return StringUtils.isValid(pOrdersContent);
 	}
 	
 }

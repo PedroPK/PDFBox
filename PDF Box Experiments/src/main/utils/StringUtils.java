@@ -35,4 +35,8 @@ public class StringUtils {
 		return notEmptyStringResponse;
 	}
 	
+	public static boolean isValid(String pOrdersContent) {
+		return pOrdersContent != null && !pOrdersContent.isEmpty();
+	}
+	
 }
