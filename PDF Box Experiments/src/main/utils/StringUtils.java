@@ -1,5 +1,6 @@
 package main.utils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,4 +11,13 @@ public class StringUtils {
 		return lines;
 	}
 	
+	public static List<String> removeCarriageReturnFromEachString(List<String> pListWithReturnCarriage) {
+		List<String>	responseWithoutBackCarriage = new ArrayList<String>();
+		for (String orderLine : pListWithReturnCarriage) {
+			orderLine = orderLine.replace("\r", "");
+			responseWithoutBackCarriage.add(orderLine);
+		}
+		pListWithReturnCarriage = responseWithoutBackCarriage;
+		return pListWithReturnCarriage;
+	}
 }

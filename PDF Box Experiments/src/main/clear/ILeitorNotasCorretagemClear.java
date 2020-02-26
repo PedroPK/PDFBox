@@ -146,4 +146,22 @@ public interface ILeitorNotasCorretagemClear {
 		boolean		pClosePdDocument
 	);
 	
+	public String			readThirdTotalOrderValueFromLine(
+		String		pLine
+	);
+	
+	public String			readThirdTotalOrderValueFromLine(
+		PDDocument	pPdfDocument,
+		int			pPageNumer,
+		int			pLineNumber
+	);
+	
+	public String			readThirdTotalOrderValueFromLine(
+		PDDocument	pPdfDocument,
+		int			pPageNumer,
+		int			pLineNumber,
+		boolean		pClosePdDocument
+	);
+	
+	
 }

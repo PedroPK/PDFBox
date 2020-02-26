@@ -862,4 +862,28 @@ class LeitorNotasCorretagemClearTest {
 		assertThat(response).isEqualTo(expectedResponse);
 	}
 	
+	@Disabled
+	@Ignore
+	@Test
+	void test_readThirdTotalOrderValueFromLine_from_FirstPage_FirstLine() {
+		// Arrange
+		PDDocument document	=	aPdfDocument;
+		int firstPageNumber	=	0;
+		int firstLineNumber	=	0;
+		
+		// Act
+		String response =
+			aLeitorNotasClear.readThirdTotalOrderValueFromLine(
+				document,
+				firstPageNumber,
+				firstLineNumber
+		);
+		
+		// Assert
+		String expectedResponse = "20,50";
+		assertThat(response).isNotNull();
+		assertThat(response).isNotEmpty();
+		assertThat(response).isEqualTo(expectedResponse);
+	}
+	
 }
