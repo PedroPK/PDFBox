@@ -89,7 +89,16 @@ public class FilesFoldersUtil {
 		
 		return response;
 	}
-
+	
+	/**
+	 * This method  will do a Drill Down, starting in the Path argument. 
+	 * It will get All Files in the Root Directory/Folder. 
+	 * If it has Sub Directories/Folders, it will use Recursion to do a Deep search in each one of them.
+	 * 
+	 * 
+	 * @param pPathName
+	 * @return
+	 */
 	public static List<File> drillDownPath(String pPathName) {
 		List<File> response = new ArrayList<File>();
 		
@@ -115,6 +124,12 @@ public class FilesFoldersUtil {
 		return response;
 	}
 	
+	/**
+	 * This method will get All Files in the Directory/Folder from Path argument, including Files in Sub Directories/Folders
+	 * 
+	 * @param pPath
+	 * @return
+	 */
 	public static List<File>	getAllFiles(String pPath) {
 		List<File> result = new ArrayList<File>();
 		
@@ -133,7 +148,7 @@ public class FilesFoldersUtil {
 		String response = pPathName;
 		
 		if ( pPathName != null  ) { 
-			if ( !pPathName.endsWith("\\") ) {
+			if ( !pPathName.endsWith(getFolderSeparator()) ) {
 				response = response + 
 					getFolderSeparator();
 			}

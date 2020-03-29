@@ -69,7 +69,10 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	/**
+	 * This method will get a list of All Files 
+	 */
 	@Override
 	public List<File> getAllFilesInDirectory() {
 		List<File> response = 
@@ -421,7 +424,7 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 	@Override
 	public String readThirdTotalOrderValueFromLine(String pLine) {
 		// TODO Auto-generated method stub
-		return null;
+		return null; //readLine(pPdfDocument, pPageNumer, pLineNumber);
 	}
 
 	@Override

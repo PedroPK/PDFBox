@@ -132,8 +132,6 @@ class LeitorNotasCorretagemClearTest {
 		assertThat(result).isGreaterThan(0);
 	}
 	
-	@Ignore
-	@Disabled
 	@Test
 	void test_readAllContentFrom_PdfDocument_NotNull() throws IOException {
 		// Arrange done by @BeforeAll method
