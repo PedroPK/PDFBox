@@ -30,7 +30,7 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 	public static final String CONTENT_FOOTER = "Resumo dos Negócios Resumo Financeiro D/C\n";
 	
 	@Override
-	public String getRelativePath_SrcMainResources() {
+	public String getFullPath_SrcMainResources() {
 		// TODO Auto-generated method stub
 		
 		return FilesFoldersUtil.getFullPathToSrcMainResourceFolder();

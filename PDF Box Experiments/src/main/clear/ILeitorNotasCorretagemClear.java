@@ -10,7 +10,7 @@ import seleniumWebDriver.entities.StockOrder;
 
 public interface ILeitorNotasCorretagemClear {
 	
-	public String		getRelativePath_SrcMainResources();
+	public String		getFullPath_SrcMainResources();
 	
 	public File			getDirectory();
 	
