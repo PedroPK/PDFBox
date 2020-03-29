@@ -92,7 +92,7 @@ class LeitorNotasCorretagemClearTest {
 		String path = aLeitorNotasClear.getRelativePath_SrcMainResources();
 		
 		// Assert
-		assertTrue(path.endsWith(PATH__SRC_MAIN_RESOURCES));
+		assertTrue(path.endsWith(FilesFoldersUtil.getFullPathToSrcMainResourceFolder()));
 	}
 	
 	@Disabled
@@ -506,8 +506,8 @@ class LeitorNotasCorretagemClearTest {
 		
 		// Assert
 		String expectedResponse = 
-			"20,50 D20,501ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\r\n" + 
-			"21,00 D21,001ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\r\n" + 
+			"20,50 D20,501ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\n" + 
+			"21,00 D21,001ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\n" + 
 			THIRD_ORDER_FIRST_PAGE;
 		
 		assertThat(response).startsWith(expectedResponse);
@@ -524,8 +524,8 @@ class LeitorNotasCorretagemClearTest {
 		
 		// Assert
 		String expectedResponse = 
-			"20,50 D20,501ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\r\n" + 
-			"21,00 D21,001ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\r\n" + 
+			"20,50 D20,501ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\n" + 
+			"21,00 D21,001ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\n" + 
 			THIRD_ORDER_FIRST_PAGE;
 		
 		assertThat(response).endsWith(expectedResponse);
@@ -542,8 +542,8 @@ class LeitorNotasCorretagemClearTest {
 		
 		// Assert
 		String expectedResponse = 
-			"20,50 D20,501ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\r\n" + 
-			"21,00 D21,001ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\r\n" + 
+			"20,50 D20,501ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\n" + 
+			"21,00 D21,001ON      NMEMBRAER01/00FRACIONARIOC1-BOVESPA\n" + 
 			THIRD_ORDER_FIRST_PAGE;
 		
 		assertThat(response).isEqualTo(expectedResponse);

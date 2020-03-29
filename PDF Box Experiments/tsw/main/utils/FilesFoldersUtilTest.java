@@ -45,7 +45,7 @@ class FilesFoldersUtilTest {
 	}
 	
 	@Test
-	void testGetSrcMainResiurceFolderContent_NotNull() {
+	void testGetSrcMainResourceFolderContent_NotNull() {
 		// Arrange + Act
 		String content = aFilesFolderUtil.getSrcMainResourceFolderContent();
 		

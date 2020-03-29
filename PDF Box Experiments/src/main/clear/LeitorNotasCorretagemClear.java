@@ -3,16 +3,14 @@ package main.clear;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 
-import difflib.StringUtills;
 import main.LeitorPDF;
-import main.utils.GeneralUtils;
 import main.utils.FilesFoldersUtil;
+import main.utils.GeneralUtils;
 import main.utils.StringUtils;
 import seleniumWebDriver.entities.StockOrder;
 
@@ -22,13 +20,14 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 	private static final String SINGLE_SPACE = " ";
 
 	private static final String LINE_BREAK = "\n";
+	private static final String RETURN_CARRIAGE = "\r";
 
 	public static final String PAGE_HEADER	=	"NOTA DE CORRETAGEM";
 	
 	public static final String CONTENT_HEADER_FULL_LINE = "Q D/CValor Operação / AjustePreço / AjusteQuantidadeObs. (*)Especificação do títuloPrazoTipo mercadoC/VNegociação";
-	public static final String CONTENT_HEADER_LAST_TOKEN = "VNegociação\r\n";
+	public static final String CONTENT_HEADER_LAST_TOKEN = "VNegociação\n";
 	
-	public static final String CONTENT_FOOTER = "\r\nResumo dos Negócios Resumo Financeiro D/C\r\n";
+	public static final String CONTENT_FOOTER = "Resumo dos Negócios Resumo Financeiro D/C\n";
 	
 	@Override
 	public String getRelativePath_SrcMainResources() {
@@ -246,9 +245,10 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 			List<String>	pageSections = 
 				StringUtils.split( pageContent, CONTENT_HEADER_LAST_TOKEN );
 			
+			int pageSectionsSize = pageSections.size();
 			if ( 
 					GeneralUtils.isValid(pageSections)		&&
-					pageSections.size() > 1
+					pageSectionsSize	>	1
 			) {
 				// Removing the Content Header
 				String ordersWithoutHeader = pageSections.get(1);
@@ -261,6 +261,19 @@ public class LeitorNotasCorretagemClear implements ILeitorNotasCorretagemClear {
 					String ordersWihtoutHeaderAndFooter = pageSections.get(0);
 					
 					response	=	ordersWihtoutHeaderAndFooter;
+				}
+				
+				// Remove \n and/or \r from ending if the exists
+				
+				while ( 
+					response.endsWith(LINE_BREAK)			||
+					response.endsWith(RETURN_CARRIAGE) 
+				) {
+					response = 
+						response.substring(
+							0, 
+							response.length()-1
+						);
 				}
 			}
 		}
